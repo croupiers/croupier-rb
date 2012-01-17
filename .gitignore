@@ -1,0 +1,9 @@
+*.gem
+pkg
+rdoc
+.rvmrc
+.bundle
+testdata/*
+.DS_Store
+doc/*
+
