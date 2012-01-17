@@ -1,0 +1,3 @@
+module Croupier
+  
+end

@@ -1,2 +1,2 @@
 # Croupier
-Random samples with specific probability distributions
+Samples of numbers with specific probability distributions
