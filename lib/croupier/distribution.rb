@@ -1,5 +1,5 @@
 module Croupier
-  
+
   #####################################################################
   # Distribution represents the probability distribution used to
   # generate the sample of random numbers.
@@ -32,8 +32,9 @@ module Croupier
 
     # Generates one random number using the current probability distribution
     def generate_single_number
+      generate_numbers 1
     end
-    
+
     # Defines a hash with banner and all available CLI options.
     # It is a hash with two keys:
     #  :banner =>  A string used as banner in the command line help
@@ -45,7 +46,7 @@ module Croupier
     #      [:mean, 'The mean of the distribution', {:default => 33}],
     #      [:median, 'Median of the distribution',{:default => 33.0, :type => :float}]
     #    ]
-    #   } 
+    #   }
     def self.cli_options
       {:banner => nil, :options=>[]}
     end

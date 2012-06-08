@@ -4,14 +4,14 @@ require 'croupier/distribution'
 Dir[File.join(File.dirname(__FILE__), "./croupier/distributions/*.rb")].each {|f| require f}
 require 'croupier/cli/application'
 #####################################################################
-# Croupier module. 
+# Croupier module.
 # Used as a namespace containing all the Croupier code.
 # The module defines a Croupier::CLI::Application and interacts with the user output console.
 #
 module Croupier
   STDERR = $stderr
   STDOUT = $stdout
-  
+
   # Croupier module singleton methods.
   #
   class << self
@@ -53,7 +53,7 @@ module Croupier
     def clear_line!
       self.write "\r"
     end
-    
+
     # Trap SIGINT signal
     def trap_interrupt
       trap('INT') do
