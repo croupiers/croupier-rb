@@ -24,8 +24,8 @@ class TestDistributionClass < MiniTest::Unit::TestCase
 
   def test_distribution_generates_array_of_n_results
     a = Croupier::Distribution.new
-    def a.generate_single_number; 15; end
-    assert_equal a.generate_numbers(15).size, 15
+    def a.generate_number; 15; end
+    assert_equal a.generate_sample(15).size, 15
   end
 
 end

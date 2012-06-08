@@ -30,7 +30,7 @@ module Croupier
       def run
         Croupier.trap_interrupt
         distribution, sample_size, params = parse_distribution_options
-        distribution.new(params).generate_numbers(sample_size).each{|n| Croupier.message n}
+        distribution.new(params).generate_sample(sample_size).each{|n| Croupier.message n}
       end
 
       private

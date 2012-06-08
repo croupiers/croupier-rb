@@ -26,13 +26,13 @@ module Croupier
     end
 
     # Main method to generate n random numbers using the current probability distribution
-    def generate_numbers(n=1)
-      (1..n).map { generate_single_number }
+    def generate_sample(n=1)
+      (1..n).map { generate_number }
     end
 
     # Generates one random number using the current probability distribution
-    def generate_single_number
-      generate_numbers 1
+    def generate_number
+      generate_sample 1
     end
 
     # Defines a hash with banner and all available CLI options.

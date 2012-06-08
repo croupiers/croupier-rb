@@ -14,7 +14,7 @@ module Croupier
         configure(options)
       end
 
-      def generate_numbers(n=1)
+      def generate_sample(n=1)
         sample = n.odd? ? n+1 : n
 
         # Generate
