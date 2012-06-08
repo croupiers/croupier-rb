@@ -8,3 +8,4 @@ testdata/*
 doc/*
 .RData
 /Gemfile.lock
+*.swp
