@@ -14,7 +14,7 @@ Once you have croupier installed in your machine, you can run the gem using the 
 
     $ croupier
 
-The common case for invoking Cruopier is:
+The common case for invoking Croupier is:
 
     $ croupier <distribution> <sample_size> [<options>]
 
@@ -50,7 +50,7 @@ First of all require the croupier library:
 
 And then use the the distribution you want to generate the sample. You can get just one number (using ```.generate_single_number```) or an array of any given size (using ```.generate_numbers(N)```)
 
-    dist = ::Croupier::Distributions::Exponential.new(:lambda => 1.7)
+    dist = Croupier::Distributions::Exponential.new(:lambda => 1.7)
     dist.generate_numbers(100) #=> returns an array of 100 random numbers following an exponential with rate 1.7
     dist.generate_single_number #=> returns one random number following an exponential with rate 1.7
 
