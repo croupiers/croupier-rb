@@ -1,9 +1,9 @@
 module Croupier
   module CLI
     #####################################################################
-    # Croupier main command line interface application object. 
-    # 
-    # When invoking +croupier+ from the command line, 
+    # Croupier main command line interface application object.
+    #
+    # When invoking +croupier+ from the command line,
     # a Croupier::CLI::Application object is created and run.
     #
     class Application
@@ -30,11 +30,11 @@ module Croupier
       def run
         Croupier.trap_interrupt
         distribution, sample_size, params = parse_distribution_options
-        distribution.new(params).generate_numbers(sample_size).each{|n| Croupier.message n}
+        distribution.new(params).generate_sample(sample_size).each{|n| Croupier.message n}
       end
 
       private
-      
+
       def parse_distribution_options
         #Trollop needs this vars locally
         available_distribution_list     = @distribution_list.keys
@@ -48,11 +48,11 @@ Currently you can use this distributions:
 [#{available_distribution_list.join(', ')}]
 
 Usage:
-  croupier <distribution> <n> [options] 
+  croupier <distribution> <n> [options]
    where <n> is the quantity of numbers Croupier will generate.
 
 Get options list for any distribution with: croupier <distrib> --help
- 
+
           EOS
           stop_on available_distribution_list
         end
@@ -69,10 +69,10 @@ Get options list for any distribution with: croupier <distrib> --help
         else
           Trollop::die "unknown distribution #{dist.inspect}"
         end
-        
+
         sample_size = ARGV.shift.to_i # get the sample size
         Trollop::die "Sample size must be a positive integer" if sample_size.nil? || sample_size < 1
-        
+
         return [@distribution_list[dist], sample_size, dist_opts]
       end
     end
