@@ -6,4 +6,4 @@ rdoc
 testdata/*
 .DS_Store
 doc/*
-
+.RData
