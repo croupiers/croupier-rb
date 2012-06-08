@@ -1,3 +1,4 @@
+require "minitest/autorun"
 require "croupier"
 class TestCroupierModule < MiniTest::Unit::TestCase
 

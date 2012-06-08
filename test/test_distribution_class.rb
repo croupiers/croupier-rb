@@ -1,3 +1,4 @@
+require "minitest/autorun"
 require "croupier"
 class TestDistributionClass < MiniTest::Unit::TestCase
 
