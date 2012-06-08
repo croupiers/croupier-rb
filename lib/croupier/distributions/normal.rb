@@ -35,10 +35,6 @@ module Croupier
         n.odd? ? gen[0..-2] : gen
       end
 
-      def generate_single_number
-        generate_numbers 1
-      end
-
       def default_parameters
         {:mean => 0, :std => 1}
       end
