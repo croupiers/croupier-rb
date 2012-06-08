@@ -32,6 +32,7 @@ module Croupier
 
     # Generates one random number using the current probability distribution
     def generate_single_number
+      generate_numbers 1
     end
     
     # Defines a hash with banner and all available CLI options.
