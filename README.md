@@ -20,9 +20,9 @@ The common case for invoking Cruopier is:
 
 where:
 
-* <distribution> is the name of the desired distribution of the random sample.
-* <sample_size> is an integer representing the size of the desired sample.
-* <options> are any extra parameters needed by the actual distribution. (If not options are provided croupier will use the default parameters for the distribution being called).
+* ```<distribution>``` is the name of the desired distribution of the random sample.
+* ```<sample_size>``` is an integer representing the size of the desired sample.
+* ```<options>``` are any extra parameters needed by the actual distribution. (If not options are provided croupier will use the default parameters for the distribution being called).
 
 ### Examples
 
