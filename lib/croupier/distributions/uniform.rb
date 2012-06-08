@@ -1,13 +1,13 @@
 module Croupier
   module Distributions
-    
+
     #####################################################################
-    # Uniform Distribution 
-    # Continous distribution where all points in an interval have 
+    # Uniform Distribution
+    # Continous distribution where all points in an interval have
     # the same probability.
     #
     class Uniform < ::Croupier::Distribution
-      
+
       def initialize(options={})
         @name = "Uniform distribution"
         @description = "Continuous distribution on [a,b] (defaults to [0,1]) where all points in the interval are equally likely"
