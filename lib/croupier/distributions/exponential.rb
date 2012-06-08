@@ -14,7 +14,7 @@ module Croupier
         configure(options)
       end
 
-      def generate_single_number
+      def generate_number
         raise Croupier::InputParamsError, "Invalid interval values" if @parameters[:lambda] <= 0
         (-1/@parameters[:lambda]) * Math.log(rand)
       end
