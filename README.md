@@ -7,7 +7,7 @@ Croupier generates random samples of numbers with specific probability distribut
 You need to have Ruby and Rubygems installed in your system. Then install croupier with:
 
     $ gem install croupier
-  
+
 ## Getting Started
 
 Once you have croupier installed in your machine, you can run the gem using the `croupier` executable:
@@ -33,7 +33,7 @@ where:
 ### Available distributions and options
 
 To get a list of all the available distributions use the ```--help``` (or ```-h```) option with croupier:
-    
+
     $ croupier --help
 
 To get a list of all the available options for a given distribution use ```--help``` (or ```-h```) option with any available distribution:

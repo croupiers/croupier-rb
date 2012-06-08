@@ -1,13 +1,13 @@
 module Croupier
   module Distributions
-    
+
     #####################################################################
-    # Uniform Distribution 
-    # Continous distribution where all points in an interval have 
-    # the same probability.
+    # Exponential Distribution
+    # Continuous probability distribution with a lambda param rate
+    # describing the time between events in a Poisson process
     #
     class Exponential < ::Croupier::Distribution
-      
+
       def initialize(options={})
         @name = "Exponential distribution"
         @description = "Continuous probability distribution with a lambda param rate describing the time between events in a Poisson process"
