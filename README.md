@@ -1,2 +1,63 @@
 # Croupier
-Samples of numbers with specific probability distributions
+
+Croupier generates random samples of numbers with specific probability distributions.
+
+## Install
+
+You need to have Ruby and Rubygems installed in your system. Then install croupier with:
+
+    $ gem install croupier
+  
+## Getting Started
+
+Once you have croupier installed in your machine, you can run the gem using the `croupier` executable:
+
+    $ croupier
+
+The common case for invoking Cruopier is:
+
+    $ croupier <distribution> <sample_size> [<options>]
+
+where:
+
+* <distribution> is the name of the desired distribution of the random sample.
+* <sample_size> is an integer representing the size of the desired sample.
+* <options> are any extra parameters needed by the actual distribution. (If not options are provided croupier will use the default parameters for the distribution being called).
+
+### Examples
+
+    $ croupier uniform 500                  # => 500 numbers with uniform distribution in [0,1] (default interval)
+    $ croupier uniform 125 -min 7 -max 15   # => 125 numbers with uniform distribution in [7,15]
+    $ croupier exponential 1000 -lambda 1.3 # => 1000 numbers following an exponential distribution with rate 1.3
+
+### Available distributions and options
+
+To get a list of all the available distributions use the ```--help``` (or ```-h```) option with croupier:
+    
+    $ croupier --help
+
+To get a list of all the available options for a given distribution use ```--help``` (or ```-h```) option with any available distribution:
+
+    $ croupier exponential --help  # => will list all the options for the exponential distribution
+
+## Using Croupier from a ruby application
+
+If you want to generate random numbers from your ruby code you can use the Distribution class that you need.
+All the available distributions are located in the ```Croupier::Distributions``` module and are represented by a class inheriting from the ```Croupier::Distribution``` class.
+First of all require the croupier library:
+
+    require 'croupier'
+
+And then use the the distribution you want to generate the sample. You can get just one number (using ```.generate_single_number```) or an array of any given size (using ```.generate_numbers(N)```)
+
+    dist = ::Croupier::Distributions::Exponential.new(:lambda => 1.7)
+    dist.generate_numbers(100) #=> returns an array of 100 random numbers following an exponential with rate 1.7
+    dist.generate_single_number #=> returns one random number following an exponential with rate 1.7
+
+## License
+
+Croupier is released under the MIT license.
+
+## Credits
+
+Developed by Juanjo Bazán [`@xuanxu`](http://twitter.com/xuanxu) & Sergio Arbeo [`@serabe`](http://twitter.com/serabe)
