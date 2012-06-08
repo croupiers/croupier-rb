@@ -1,32 +1,64 @@
+require 'croupier/cli/trollop'
+require 'croupier/exceptions'
+require 'croupier/distribution'
+Dir[File.join(File.dirname(__FILE__), "./croupier/distributions/*.rb")].each {|f| require f}
+require 'croupier/cli/application'
+#####################################################################
+# Croupier module.
+# Used as a namespace containing all the Croupier code.
+# The module defines a Croupier::CLI::Application and interacts with the user output console.
+#
 module Croupier
+  STDERR = $stderr
+  STDOUT = $stdout
 
-  # TODO: Discuss if int_length should have an abs call at the end...
-  # Uniform distribution.
-  def runi(size=1, int_start=0, int_end=1, &block)
-    int_length = (int_end - int_start)
-    sample = (1..size).map { int_start + int_length * rand }
-    sample = sample.map(&block) if block
-    first_or_whole sample
-  end
-
-  # Exponential distribution
-  def rexp(avg=1, size=1)
-    runi(size) do |x|
-      -avg * Math.log(x)
-    end
-  end
-
-  # Normal distribution
-  def rnorm(avg=0, std=1, size=1)
-    sample = runi(12*size).each_slize(12).map do |x|
-      avg + std * x.inject(-6, &:+)
+  # Croupier module singleton methods.
+  #
+  class << self
+    # Current Croupier Application
+    def application
+      @application ||= ::Croupier::CLI::Application.new
     end
 
-    first_or_whole sample
-  end
+    # Set the current Croupier application object.
+    def application=(app)
+      @application = app
+    end
 
-  protected
-  def first_or_whole(arr)
-    arr.size == 1 ? arr.first : arr
+    # Stops the execution of the Croupier application.
+    def stop(msg = "Error: Croupier finished.")
+      self.error_message msg
+      exit(false)
+    end
+
+    # Writes message to the standard output
+    def message(msg)
+      STDOUT.puts msg
+      STDOUT.flush
+    end
+
+    # Writes message to the error output
+    def error_message(msg)
+      STDERR.puts msg
+      STDERR.flush
+    end
+
+    # Writes to the standard output
+    def write(str)
+      STDOUT.write str
+      STDOUT.flush
+    end
+
+    # Clear current console line
+    def clear_line!
+      self.write "\r"
+    end
+
+    # Trap SIGINT signal
+    def trap_interrupt
+      trap('INT') do
+        Croupier.stop("\nCroupier Exiting... Interrupt signal received.")
+      end
+    end
   end
 end

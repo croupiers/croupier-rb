@@ -6,4 +6,5 @@ rdoc
 testdata/*
 .DS_Store
 doc/*
-
+.RData
+/Gemfile.lock
