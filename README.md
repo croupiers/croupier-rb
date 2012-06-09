@@ -48,11 +48,11 @@ First of all require the croupier library:
 
     require 'croupier'
 
-And then use the the distribution you want to generate the sample. You can get just one number (using ```.generate_single_number```) or an array of any given size (using ```.generate_numbers(N)```)
+And then use the the distribution you want to generate the sample. You can get just one number (using ```.generate_number```) or an array of any given size (using ```.generate_sample(N)```)
 
     dist = Croupier::Distributions::Exponential.new(:lambda => 1.7)
-    dist.generate_numbers(100) #=> returns an array of 100 random numbers following an exponential with rate 1.7
-    dist.generate_single_number #=> returns one random number following an exponential with rate 1.7
+    dist.generate_sample(100) #=> returns an array of 100 random numbers following an exponential with rate 1.7
+    dist.generate_number #=> returns one random number following an exponential with rate 1.7
 
 ## License
 
