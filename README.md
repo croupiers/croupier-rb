@@ -54,6 +54,12 @@ And then use the the distribution you want to generate the sample. You can get j
     dist.generate_sample(100) #=> returns an array of 100 random numbers following an exponential with rate 1.7
     dist.generate_number #=> returns one random number following an exponential with rate 1.7
 
+## How to generate a distribution.
+
+There are several ways. The easiest one is to override ```generate_number``` or ```generate_sample``` (one is enough).
+
+Nonetheless there is another cool way to implement a distribution: implementing ```inv_pdf```.
+
 ## License
 
 Croupier is released under the MIT license.
