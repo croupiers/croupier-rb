@@ -28,26 +28,20 @@ class TestDistributionClass < MiniTest::Unit::TestCase
     assert_equal a.generate_sample(15).size, 15
   end
 
-  def test_instance_copies_inv_pdf
-    c = Class.new(Croupier::Distribution)
-    c.inv_pdf { |n| 2*n }
-    a = c.new
-    c.inv_pdf { |n| 3*n }
-    assert_equal a.instance_variable_get("@inv_pdf").call(2), 4
-  end
-
   def test_generate_number_calls_inv_pdf_if_present
-    c = Class.new(Croupier::Distribution)
-    c.inv_pdf { |n| true }
-    def c.generate_sample(n); false; end
+    c = Class.new(Croupier::Distribution) do
+      def inv_pdf n; true; end
+      def generate_sample n; false; end
+    end
     a = c.new
     assert a.generate_number
   end
 
   def test_generate_sample_calls_inv_pdf_if_present
-    c = Class.new(Croupier::Distribution)
-    c.inv_pdf { |n| true }
-    def c.generate_number; false; end
+    c = Class.new(Croupier::Distribution) do
+      def inv_pdf n; true; end
+      def generate_number n; false; end
+    end
     a = c.new
     assert a.generate_sample(3).all?
   end

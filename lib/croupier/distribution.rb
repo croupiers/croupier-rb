@@ -12,7 +12,6 @@ module Croupier
     def initialize(options={})
       @name = nil
       @description = nil
-      @inv_pdf = self.class.instance_variable_get("@inv_pdf")
       configure(options)
     end
 
@@ -28,8 +27,8 @@ module Croupier
 
     # Main method to generate n random numbers using the current probability distribution
     def generate_sample(n=1)
-      if @inv_pdf
-        (1..n).map{ @inv_pdf.call(rand) }
+      if self.respond_to? :inv_pdf
+        (1..n).map{ inv_pdf(rand) }
       else
         (1..n).map { generate_number }
       end
@@ -37,18 +36,11 @@ module Croupier
 
     # Generates one random number using the current probability distribution
     def generate_number
-      if @inv_pdf
-        @inv_pdf.call(rand)
+      if self.respond_to? :inv_pdf
+        inv_pdf(rand)
       else
         generate_sample 1
       end
-    end
-
-    # Gets the inverse of a pdf.
-    # This is quite important since having it allows to generate the distribution
-    # from the uniform[0,1]
-    def self.inv_pdf(&block)
-      @inv_pdf = block
     end
 
     # Defines a hash with banner and all available CLI options.
