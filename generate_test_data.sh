@@ -13,5 +13,4 @@ ruby -Ilib ./bin/croupier normal 10000 --mean 5 --std 6 > $OUTPUT_DIR/normal_5_6
 
 echo 'Generating uniforms...'
 ruby -Ilib ./bin/croupier uniform 10000 --a 0 --b 1 > $OUTPUT_DIR/uniform_0_1.data
-ruby -Ilib ./bin/croupier uniform 10000 --a 5 --b 6 > $OUTPUT_DIR/uniform_5_6.data
-ruby -Ilib ./bin/croupier uniform 10000 --a 5 --b 33 > $OUTPUT_DIR/uniform_5_6.data
+ruby -Ilib ./bin/croupier uniform 10000 --a 5 --b 33 > $OUTPUT_DIR/uniform_5_33.data
