@@ -9,3 +9,4 @@ doc/*
 .RData
 /Gemfile.lock
 *.swp
+/test/distributions/generated_samples/**
