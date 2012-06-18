@@ -9,7 +9,7 @@ module Croupier
     class Normal < ::Croupier::Distribution
 
       def initialize(options={})
-        @name = "Uniform distribution"
+        @name = "Normal distribution"
         @description = "Continuous distribution (mu,sigma) (defaults to (0,1) ) where mu is the mean and sigma the standard deviation."
         configure(options)
       end
