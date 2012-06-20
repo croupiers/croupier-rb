@@ -13,4 +13,8 @@
 # install.packages("testthat", repos = "http://cran.r-project.org/", type="source")
 #
 library("testthat")
+if(require('triangle') == FALSE) {
+  install.packages('triangle')
+  require('triangle')
+}
 test_dir("./distributions/R_tests/")
