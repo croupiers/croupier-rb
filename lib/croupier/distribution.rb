@@ -28,7 +28,7 @@ module Croupier
     # Main method to generate n random numbers using the current probability distribution
     def generate_sample(n=1)
       if self.respond_to? :inv_cdf
-        (1..n).map{ inv_pdf(rand) }
+        (1..n).map{ inv_cdf(rand) }
       else
         (1..n).map { generate_number }
       end
@@ -37,7 +37,7 @@ module Croupier
     # Generates one random number using the current probability distribution
     def generate_number
       if self.respond_to? :inv_cdf
-        inv_pdf(rand)
+        inv_cdf(rand)
       else
         generate_sample 1
       end
