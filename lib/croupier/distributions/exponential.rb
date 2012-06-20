@@ -15,7 +15,7 @@ module Croupier
         raise Croupier::InputParamsError, "Invalid interval values" if @parameters[:lambda] <= 0
       end
 
-      def inv_pdf n
+      def inv_cdf n
         (-1/@parameters[:lambda]) * Math.log(n)
       end
 
