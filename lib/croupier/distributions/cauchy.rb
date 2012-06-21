@@ -14,9 +14,8 @@ module Croupier
         raise Croupier::InputParamsError, "Invalid scale value, it must be positive" unless params[:scale] > 0
       end
 
-      def generate_number
-        n = rand
-        n == 0 ? generate_number : params[:location] + (params[:scale] * Math.tan(Math::PI * (n - 0.5)))
+      def inv_cdf n
+        params[:location] + (params[:scale] * Math.tan(Math::PI * (0.5 - n)))
       end
 
       def default_parameters
