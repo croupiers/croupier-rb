@@ -12,9 +12,18 @@
 # If it is not included in your R installation you can do so running this command:
 # install.packages("testthat", repos = "http://cran.r-project.org/", type="source")
 #
-library("testthat")
+
+if(require('testthat') == FALSE) {
+  install.packages('testthat', repos = "http://cran.r-project.org/", type="source")
+  require('testthat')
+}
+
 if(require('triangle') == FALSE) {
   install.packages('triangle')
   require('triangle')
+}
+if(require('vcd') == FALSE) {
+  install.packages('vcd')
+  require('vcd')
 }
 test_dir("./distributions/R_tests/")
