@@ -58,7 +58,8 @@ And then use the the distribution you want to generate the sample. You can get j
 
 There are several ways. The easiest one is to override ```generate_number``` or ```generate_sample``` (one is enough).
 
-Nonetheless there is another cool way to implement a distribution: implementing ```inv_pdf```.
+Nonetheless there is another cool way to implement a distribution: implementing ```inv_cdf```. ``ìnv_cdf``` receives a
+parameter ```n``` that is a sample of a uniform distribution. It should return the inverse of the cdf applied to ```n```.
 
 ## License
 

@@ -27,8 +27,8 @@ module Croupier
 
     # Main method to generate n random numbers using the current probability distribution
     def generate_sample(n=1)
-      if self.respond_to? :inv_pdf
-        (1..n).map{ inv_pdf(rand) }
+      if self.respond_to? :inv_cdf
+        (1..n).map{ inv_cdf(rand) }
       else
         (1..n).map{ generate_number }
       end
@@ -36,11 +36,16 @@ module Croupier
 
     # Generates one random number using the current probability distribution
     def generate_number
-      if self.respond_to? :inv_pdf
-        inv_pdf(rand)
+      if self.respond_to? :inv_cdf
+        inv_cdf(rand)
       else
         generate_sample 1
       end
+    end
+
+    # Sick of using @parameters. Too long for me. # Sergio
+    def params
+      @parameters
     end
 
     # Defines a hash with banner and all available CLI options.

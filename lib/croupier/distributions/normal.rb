@@ -28,8 +28,8 @@ module Croupier
         end
 
         # Adjust parameters.
-        gen.map!{ |x| x * @parameters[:std] }  if @parameters[:std] != 1
-        gen.map!{ |x| x + @parameters[:mean] } if @parameters[:mean] != 0
+        gen.map!{ |x| x * params[:std] }  if params[:std] != 1
+        gen.map!{ |x| x + params[:mean] } if params[:mean] != 0
 
         # Adjust length
         n.odd? ? gen[0..-2] : gen
