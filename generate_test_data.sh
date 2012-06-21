@@ -22,3 +22,7 @@ ruby -Ilib ./bin/croupier triangular 10000 --a -1 --b 5 --c 4 > $OUTPUT_DIR/tria
 echo 'Generating poissons...'
 ruby -Ilib ./bin/croupier poisson 10000 --mean 5 > $OUTPUT_DIR/poisson_5.data
 ruby -Ilib ./bin/croupier poisson 10000 --mean 50 > $OUTPUT_DIR/poisson_50.data
+
+echo 'Generating cauchys...'
+ruby -Ilib ./bin/croupier cauchy 10000 > $OUTPUT_DIR/cauchy_0_1.data
+ruby -Ilib ./bin/croupier cauchy 10000 --location 12 --scale 3 > $OUTPUT_DIR/cauchy_12_3.data
