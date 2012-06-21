@@ -18,7 +18,7 @@ module Croupier
       end
 
       def generate_number
-        l = Math.exp(-params[:mean])
+        l = Math.exp(-params[:lambda])
         k = 0; p = 1;
         while p > l
           p *= rand
@@ -28,7 +28,7 @@ module Croupier
       end
 
       def default_parameters
-        {:mean => 50}
+        {:lambda => 50}
       end
 
       def self.cli_name
@@ -37,7 +37,7 @@ module Croupier
 
       def self.cli_options
         {:options => [
-           [:mean, 'mean of the distribution', {:type=>:integer, :default => 50}]
+           [:lambda, 'rate parameter (equal to the mean of the distribution)', {:type=>:integer, :default => 50}]
          ],
          :banner => "Poisson distribution. Discrete probability distribution that expresses the probability of a given number of events occurring in a fixed interval of time."
         }
