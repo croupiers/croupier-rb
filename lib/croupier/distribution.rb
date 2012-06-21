@@ -43,7 +43,7 @@ module Croupier
       end
     end
 
-    # Sick of using @parameters. Too long for me. # Sergio
+    # convenience method for lazy programmers
     def params
       @parameters
     end
