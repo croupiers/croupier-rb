@@ -20,7 +20,7 @@ module Croupier
       end
 
       def default_parameters
-        {:a => 0, :b => 1}
+        {:a => 0.0, :b => 1.0}
       end
 
       def self.cli_name

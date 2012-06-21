@@ -30,7 +30,7 @@ module Croupier
       if self.respond_to? :inv_pdf
         (1..n).map{ inv_pdf(rand) }
       else
-        (1..n).map { generate_number }
+        (1..n).map{ generate_number }
       end
     end
 
