@@ -2,14 +2,14 @@
 
 Gem::Specification.new do |s|
   s.name = 'croupier'
-  s.version = "1.1.0"
+  s.version = "1.2.0"
   s.platform = Gem::Platform::RUBY
   s.date = Time.now.strftime('%Y-%m-%d')
 
   s.summary = "Samples of random numbers with specific probability distributions"
   s.description = "Croupier is a Ruby gem to generate a random sample of numbers with a given probability distribution."
 
-  s.authors = ['Juanjo Bazán']
+  s.authors = ['Juanjo Bazán', 'Sergio Arbeo']
   s.email = ["jjbazan@gmail.com"]
   s.homepage = 'https://github.com/xuanxu/croupier'
 

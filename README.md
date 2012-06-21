@@ -32,6 +32,8 @@ where:
 
 ### Available distributions and options
 
+Current version provides: Cauchy, exponential, normal, Poisson, triangular and uniform distributions.
+
 To get a list of all the available distributions use the ```--help``` (or ```-h```) option with croupier:
 
     $ croupier --help
