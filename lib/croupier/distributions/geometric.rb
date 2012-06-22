@@ -2,7 +2,7 @@ module Croupier
   module Distributions
 
     #####################################################################
-    # Poisson Distribution
+    # Geometric Distribution
     # Discrete probability distribution that expresses the number of X
     # Bernoulli trials needed to get one success, supported on the
     # set { 1, 2, 3, ...}
