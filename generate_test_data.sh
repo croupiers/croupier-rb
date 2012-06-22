@@ -26,3 +26,7 @@ ruby -Ilib ./bin/croupier poisson 10000 --lambda 50 > $OUTPUT_DIR/poisson_50.dat
 echo 'Generating cauchys...'
 ruby -Ilib ./bin/croupier cauchy 10000 > $OUTPUT_DIR/cauchy_0_1.data
 ruby -Ilib ./bin/croupier cauchy 10000 --location 12 --scale 3 > $OUTPUT_DIR/cauchy_12_3.data
+
+echo 'Generating geometrics...'
+ruby -Ilib ./bin/croupier geometric 10000 -p 0.5 > $OUTPUT_DIR/geometric_05.data
+ruby -Ilib ./bin/croupier geometric 10000 -p 0.05 > $OUTPUT_DIR/geometric_005.data
