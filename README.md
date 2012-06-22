@@ -32,7 +32,16 @@ where:
 
 ### Available distributions and options
 
-Current version provides: Cauchy, exponential, normal, Poisson, triangular and uniform distributions.
+Current version implements the following distributions: 
+
+* Cauchy
+* Exponential
+* Geometric
+* Negative binomial
+* Normal
+* Poisson
+* Triangular
+* Uniform
 
 To get a list of all the available distributions use the ```--help``` (or ```-h```) option with croupier:
 
