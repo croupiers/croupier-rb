@@ -15,7 +15,7 @@ module Croupier
         @name = "Negative binomial distribution"
         @description = "Discrete probability distribution of the number of successes in a sequence of Bernoulli trials before a specified (non-random) number of failures (denoted size) occur."
         configure(options)
-        raise Croupier::InputParamsError, "Param prob must be in the interval [0,1]" if params[:prob] > 1 || params[:prob] < 0
+        raise Croupier::InputParamsError, "Probability of success must be in the interval [0,1]" if params[:success] > 1 || params[:success] < 0
       end
 
       # Fair point: it is not the inverse of the cdf,
@@ -29,7 +29,7 @@ module Croupier
       end
 
       def base_geometric
-        ::Croupier::Distributions::Geometric.new(p: params[:prob])
+        ::Croupier::Distributions::Geometric.new(success: params[:success])
       end
 
       def generate_geometrics(n)
@@ -37,7 +37,7 @@ module Croupier
       end
 
       def default_parameters
-        {:prob => 0.5, :size => 1}
+        {:success => 0.5, :size => 1}
       end
 
       def self.cli_name
@@ -47,7 +47,7 @@ module Croupier
       def self.cli_options
         {:options => [
            [:size, 'number of errors', {:type => :integer, :default => 1}],
-           [:prob, 'success probability of each trial', {:type=>:float, :default => 0.5}]
+           [:success, 'success probability of each trial', {:type=>:float, :short => "-p", :default => 0.5}]
          ],
          :banner => "Negative binomial distribution. Discrete probability distribution of the number of successes in a sequence of Bernoulli trials before a specified (non-random) number of failures (denoted size) occur."
         }
