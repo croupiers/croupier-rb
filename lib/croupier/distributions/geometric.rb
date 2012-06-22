@@ -37,7 +37,7 @@ module Croupier
         {:options => [
            [:p, 'success probability of each trial', {:type=>:float, :default => 0.5}]
          ],
-         :banner => "Poisson distribution. Discrete probability distribution that expresses the number of X Bernoulli trials needed to get one success, supported on the set { 1, 2, 3, ...} }"
+         :banner => "Geometric distribution. Discrete probability distribution that expresses the number of X Bernoulli trials needed to get one success, supported on the set { 1, 2, 3, ...} }"
         }
       end
     end
