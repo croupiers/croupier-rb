@@ -70,6 +70,4 @@ module Croupier
     end
   end
 
-  module Distributions
-  end
 end

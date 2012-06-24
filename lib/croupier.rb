@@ -1,6 +1,7 @@
 require 'croupier/cli/trollop'
 require 'croupier/exceptions'
 require 'croupier/distribution'
+require 'croupier/distributions'
 Dir[File.join(File.dirname(__FILE__), "./croupier/distributions/*.rb")].each {|f| require f}
 require 'croupier/cli/application'
 #####################################################################
