@@ -65,6 +65,18 @@ And then use the the distribution you want to generate the sample. You can get j
     dist.generate_sample(100) #=> returns an array of 100 random numbers following an exponential with rate 1.7
     dist.generate_number #=> returns one random number following an exponential with rate 1.7
 
+It's posible to instantiate each Distribution class directly:
+
+    dist = Croupier::Distributions::Exponential.new(:lambda => 1.7)
+
+or calling Distributions methods:
+
+    dist = Croupier::Distributions.exponential :lambda => 1.7
+
+To get a list of all available distributions/methods in Distributions module call ```list```
+
+    Croupier::Distributions.list
+
 ## How to generate a distribution.
 
 There are several ways. The easiest one is to override ```generate_number``` or ```generate_sample``` (one is enough).
