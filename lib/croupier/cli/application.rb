@@ -13,13 +13,10 @@ module Croupier
       # It Checks and loads the available distributions.
       def initialize
         @distribution_list, @distributions_options = {}, {}
-        ::Croupier::Distributions.constants.each{|distrib|
-          d = ::Croupier::Distributions.const_get(distrib)
-          if d.is_a?(Class) && d.superclass == Croupier::Distribution
-            @distribution_list[d.cli_name] = d
-            @distributions_options[d.cli_name] = d.cli_options
-          end
-        }
+        ::Croupier::Distributions.all.each do |d|
+          @distribution_list[d.cli_name] = d
+          @distributions_options[d.cli_name] = d.cli_options
+        end
       end
 
       # Run the Croupier application. The run method performs the following steps:
