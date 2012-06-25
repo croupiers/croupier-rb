@@ -34,6 +34,8 @@ where:
 
 Current version implements the following distributions: 
 
+* Bernoulli
+* Binomial
 * Cauchy
 * Exponential
 * Geometric
