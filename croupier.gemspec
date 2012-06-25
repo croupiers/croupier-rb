@@ -1,8 +1,9 @@
 # encoding: utf-8
+require File.expand_path "#{File.dirname(__FILE__)}/lib/croupier/version"
 
 Gem::Specification.new do |s|
   s.name = 'croupier'
-  s.version = "1.3.0"
+  s.version = Croupier::VERSION
   s.platform = Gem::Platform::RUBY
   s.date = Time.now.strftime('%Y-%m-%d')
 
