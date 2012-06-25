@@ -36,6 +36,7 @@ module Croupier
         #Trollop needs this vars locally
         available_distribution_list     = @distribution_list.keys
         available_distributions_options = @distributions_options
+        version = ::Croupier::VERSION
 
         opts = Trollop::options do
           banner <<-EOS
@@ -51,6 +52,7 @@ Usage:
 Get options list for any distribution with: croupier <distrib> --help
 
           EOS
+          version "Croupier version #{version}"
           stop_on available_distribution_list
         end
 

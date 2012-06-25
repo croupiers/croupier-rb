@@ -1,3 +1,4 @@
+require 'croupier/version'
 require 'croupier/cli/trollop'
 require 'croupier/exceptions'
 require 'croupier/distribution'
