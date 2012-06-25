@@ -34,3 +34,7 @@ ruby -Ilib ./bin/croupier geometric 10000 -p 0.05 > $OUTPUT_DIR/geometric_005.da
 echo 'Generating nbinomials...'
 ruby -Ilib ./bin/croupier nbinomial 10000 -p 0.5 --size 5 > $OUTPUT_DIR/nbinomial_05_5.data
 ruby -Ilib ./bin/croupier nbinomial 10000 -p 0.25 --size 15 > $OUTPUT_DIR/nbinomial_025_15.data
+
+echo 'Generating binomials...'
+ruby -Ilib ./bin/croupier binomial 10000 -p 0.5 --size 5 > $OUTPUT_DIR/binomial_05_5.data
+ruby -Ilib ./bin/croupier binomial 10000 -p 0.35 --size 17 > $OUTPUT_DIR/binomial_035_17.data
