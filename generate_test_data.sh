@@ -38,3 +38,7 @@ ruby -Ilib ./bin/croupier nbinomial 10000 -p 0.25 --size 15 > $OUTPUT_DIR/nbinom
 echo 'Generating binomials...'
 ruby -Ilib ./bin/croupier binomial 10000 -p 0.5 --size 5 > $OUTPUT_DIR/binomial_05_5.data
 ruby -Ilib ./bin/croupier binomial 10000 -p 0.35 --size 17 > $OUTPUT_DIR/binomial_035_17.data
+
+echo 'Generating bernoullis...'
+ruby -Ilib ./bin/croupier bernoulli 10000 > $OUTPUT_DIR/bernoulli_05.data
+ruby -Ilib ./bin/croupier bernoulli 10000 -p 0.75 > $OUTPUT_DIR/bernoulli_075.data
