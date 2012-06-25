@@ -7,7 +7,6 @@ module Croupier
     # sequence of Bernoulli trials before a specified (non-random)
     # number of failures (denoted size) occur.
     #
-    # The parameter prob expresses the probability of success.
     # Wikipedia -- http://en.wikipedia.org/wiki/Negative_binomial_distribution
     class Nbinomial < ::Croupier::Distribution
 
@@ -28,14 +27,6 @@ module Croupier
         end
       end
 
-      def base_geometric
-        ::Croupier::Distributions::Geometric.new(success: params[:success])
-      end
-
-      def generate_geometrics(n)
-        base_geometric.generate_sample(params[:size]*n)
-      end
-
       def default_parameters
         {:success => 0.5, :size => 1}
       end
@@ -52,6 +43,16 @@ module Croupier
          :banner => "Negative binomial distribution. Discrete probability distribution of the number of successes in a sequence of Bernoulli trials before a specified (non-random) number of failures (denoted size) occur."
         }
       end
+
+      private
+      def base_geometric
+        ::Croupier::Distributions::Geometric.new(success: params[:success])
+      end
+
+      def generate_geometrics(n)
+        base_geometric.generate_sample(params[:size]*n)
+      end
+
     end
   end
 end
