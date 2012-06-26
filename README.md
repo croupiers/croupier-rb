@@ -94,3 +94,5 @@ Croupier is released under the MIT license.
 ## Credits
 
 Developed by Juanjo Bazán [`@xuanxu`](http://twitter.com/xuanxu) & Sergio Arbeo [`@serabe`](http://twitter.com/serabe)
+
+Follow news and releases on twitter: [`@CroupierGem`](http://twitter.com/CroupierGem)
