@@ -17,7 +17,7 @@ module Croupier
       end
 
       def default_parameters
-        {:constant => 1.0}
+        {:constant => 42.0}
       end
 
       def self.cli_name
@@ -26,7 +26,7 @@ module Croupier
 
       def self.cli_options
         {:options => [
-           [:constant, 'value to be returned', {:type=>:float, :default => 1.0}]
+           [:constant, 'value to be returned', {:type=>:float, :default => 42.0}]
          ],
          :banner => "Degenerate distribution. Discrete probability distribution that returns the same value each time."
         }
