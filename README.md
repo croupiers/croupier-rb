@@ -32,11 +32,12 @@ where:
 
 ### Available distributions and options
 
-Current version implements the following distributions: 
+Current version implements the following distributions:
 
 * Bernoulli
 * Binomial
 * Cauchy
+* Degenerate
 * Exponential
 * Geometric
 * Negative binomial
