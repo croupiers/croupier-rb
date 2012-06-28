@@ -80,12 +80,13 @@ To get a list of all available distributions/methods in Distributions module cal
 
     Croupier::Distributions.list
 
-## How to generate a distribution.
+## How to generate a new distribution.
 
 There are several ways. The easiest one is to override ```generate_number``` or ```generate_sample``` (one is enough).
 
-Nonetheless there is another cool way to implement a distribution: implementing ```inv_cdf```. ``ìnv_cdf``` receives a
-parameter ```n``` that is a sample of a uniform distribution. It should return the inverse of the cdf applied to ```n```.
+Nonetheless there is another cool way to implement a distribution: implementing ```inv_cdf```:
+
+```ìnv_cdf``` receives a parameter ```n``` that is a sample of a uniform distribution. It should return the inverse of the cdf applied to ```n```.
 
 ## License
 
