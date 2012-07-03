@@ -1,4 +1,4 @@
-# Croupier
+# Croupier [![Build Status](https://secure.travis-ci.org/xuanxu/croupier.png?branch=master)](http://travis-ci.org/xuanxu/croupier)
 
 Croupier generates random samples of numbers with specific probability distributions.
 
