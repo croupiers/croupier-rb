@@ -50,3 +50,6 @@ ruby -Ilib ./bin/croupier credit_card 10 --master-card > $OUTPUT_DIR/credit_card
 ruby -Ilib ./bin/croupier credit_card 10 --discover --initial-values 12345 > $OUTPUT_DIR/credit_card_discover.data
 ruby -Ilib ./bin/croupier credit_card 10 --american-express > $OUTPUT_DIR/credit_card_american_express.data
 
+echo 'Generating gammas...'
+ruby -Ilib ./bin/croupier gamma 10000 --shape 1.0 --scale 1.0 > $OUTPUT_DIR/gamma_1_1.data
+ruby -Ilib ./bin/croupier gamma 10000 --shape 10.35 --scale 2.5 > $OUTPUT_DIR/gamma_1035_25.data
