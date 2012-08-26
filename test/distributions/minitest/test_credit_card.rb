@@ -32,15 +32,15 @@ class TestDistributionClass < MiniTest::Unit::TestCase
     assert_equal "6", credit_card(discover: true)[0]
   end
 
-  def test_initial_numbers_are_placed_at_beginning
+  def test_initial_values_are_placed_at_beginning
     assert_equal "2345", credit_card(initial_values: "2345")[0..3]
   end
 
-  def test_initial_numbers_are_placed_after_card_type_if_one_is_given
+  def test_initial_values_are_placed_after_card_type_if_one_is_given
     assert_equal "62345", credit_card(discover: true, initial_values: "2345")[0..4]
   end
 
-  def test_initial_numbers_get_not_numbers_removed_before_placing_them
+  def test_initial_values_get_not_numbers_removed_before_placing_them
     assert_equal "2345", credit_card(initial_values: "a2b3c4d5e")[0..3]
   end
 

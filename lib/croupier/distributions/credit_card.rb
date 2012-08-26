@@ -17,7 +17,7 @@ module Croupier
         n = "#{initial_value_by_card_type}#{initial_values}"
         n += generate_random_string(15 - n.size)
         n = n[0..14]
-        n + check_number_for(n).to_s
+        n + check_digit_for(n).to_s
       end
 
       def default_parameters
@@ -34,7 +34,7 @@ module Croupier
         "credit_card"
       end
 
-      def check_number_for(n)
+      def check_digit_for(n)
         # Sum, every odd number should be doubled.
         # If result has two digits, they should be summed up.
         # This is equivalent to substracting 9
