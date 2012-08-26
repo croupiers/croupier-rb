@@ -43,4 +43,18 @@ class TestDistributionClass < MiniTest::Unit::TestCase
   def test_initial_numbers_get_not_numbers_removed_before_placing_them
     assert_equal "2345", credit_card(initial_values: "a2b3c4d5e")[0..3]
   end
+
+  def test_generate_numbers_for_getting_a_15_chars_long_string
+    assert_equal 16, credit_card.size
+    assert_equal 16, credit_card(visa: true).size
+    assert_equal 16, credit_card(initial_values: "234566789-32").size
+    assert_equal 16, credit_card(initial_values: "01234567890123456789").size
+  end
+
+  def test_check_digit
+    assert_equal "2", credit_card(initial_values: "1234 5678 9012 345")[-1]
+    assert_equal "7", credit_card(initial_values: "1111 1111 1111 111")[-1]
+    assert_equal "8", credit_card(initial_values: "1111 1111 1111 101")[-1]
+    assert_equal "2", credit_card(visa: true, initial_values: "602das63276315242666")[-1]
+  end
 end

@@ -14,7 +14,10 @@ module Croupier
       end
 
       def generate_number
-        "#{initial_value_by_card_type}#{initial_values}"
+        n = "#{initial_value_by_card_type}#{initial_values}"
+        n += generate_random_string(15 - n.size)
+        n = n[0..14]
+        n + check_number_for(n).to_s
       end
 
       def default_parameters
@@ -29,6 +32,29 @@ module Croupier
 
       def self.cli_name
         "credit_card"
+      end
+
+      def check_number_for(n)
+        # Sum, every odd number should be doubled.
+        # If result has two digits, they should be summed up.
+        # This is equivalent to substracting 9
+        x = n.each_char.map do |x|
+          x.to_i
+        end.each_with_index.map do |x, i|
+          if i.even?
+            x = 2*x
+            (x >= 10) ? x - 9 : x
+          else
+            x
+          end
+        end.inject(&:+) % 10
+
+        return 0 if x == 0
+        10 - x
+      end
+
+      def generate_random_string l
+        (1..l).map{ rand(10).to_s }.join ''
       end
 
       def initial_values
