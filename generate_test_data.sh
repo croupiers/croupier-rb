@@ -42,3 +42,11 @@ ruby -Ilib ./bin/croupier binomial 10000 -p 0.35 --size 17 > $OUTPUT_DIR/binomia
 echo 'Generating bernoullis...'
 ruby -Ilib ./bin/croupier bernoulli 10000 > $OUTPUT_DIR/bernoulli_05.data
 ruby -Ilib ./bin/croupier bernoulli 10000 -p 0.75 > $OUTPUT_DIR/bernoulli_075.data
+
+echo 'Generating credit cards...'
+ruby -Ilib ./bin/croupier credit_card 10 > $OUTPUT_DIR/credit_card.data
+ruby -Ilib ./bin/croupier credit_card 10 --visa > $OUTPUT_DIR/credit_card_visa.data
+ruby -Ilib ./bin/croupier credit_card 10 --master-card > $OUTPUT_DIR/credit_card_master_card.data
+ruby -Ilib ./bin/croupier credit_card 10 --discover --initial-values 12345 > $OUTPUT_DIR/credit_card_discover.data
+ruby -Ilib ./bin/croupier credit_card 10 --american-express > $OUTPUT_DIR/credit_card_american_express.data
+
