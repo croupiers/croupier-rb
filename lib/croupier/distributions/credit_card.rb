@@ -14,7 +14,7 @@ module Croupier
       end
 
       def generate_number
-        "#{initial_value_by_card_type}"
+        "#{initial_value_by_card_type}#{initial_values}"
       end
 
       def default_parameters
@@ -22,12 +22,17 @@ module Croupier
           :master_card => false,
           :american_express => false,
           :discover => false,
-          :visa => false
+          :visa => false,
+          :initial_values => ""
         }
       end
 
       def self.cli_name
         "credit_card"
+      end
+
+      def initial_values
+        params[:initial_values].gsub /\D/, ''
       end
 
       def initial_value_by_card_type
@@ -43,7 +48,8 @@ module Croupier
            [:master_card, 'master card type', {:type=>:boolean, :default => false}],
            [:american_express, 'american express card type', {:type=>:boolean, :default => false}],
            [:visa, 'visa card type', {:type=>:boolean, :default => false}],
-           [:discover, 'discover card type', {:type=>:boolean, :default => false}]
+           [:discover, 'discover card type', {:type=>:boolean, :default => false}],
+           [:initial_values, 'initial values for the credit card. They will be place after card type if one is given.', {:type=>:string, :default => ""}]
          ],
          :banner => "Credit Card distribution. Generate random card numbers"
         }
