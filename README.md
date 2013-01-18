@@ -1,6 +1,9 @@
-# Croupier [![Build Status](https://secure.travis-ci.org/xuanxu/croupier.png?branch=master)](http://travis-ci.org/xuanxu/croupier)
+# Croupier
 
 Croupier generates random samples of numbers with specific probability distributions.
+
+[![Gem Version](https://badge.fury.io/rb/croupier.png)](http://badge.fury.io/rb/croupier)
+[![Build Status](https://secure.travis-ci.org/xuanxu/croupier.png?branch=master)](http://travis-ci.org/xuanxu/croupier)
 
 ## Install
 
