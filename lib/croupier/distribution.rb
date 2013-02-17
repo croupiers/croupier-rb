@@ -39,7 +39,7 @@ module Croupier
       if self.respond_to? :inv_cdf
         inv_cdf(rand)
       else
-        generate_sample 1
+        generate_sample(1).first
       end
     end
 
