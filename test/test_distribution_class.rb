@@ -45,4 +45,14 @@ class TestDistributionClass < MiniTest::Unit::TestCase
     a = c.new
     assert a.generate_sample(3).all?
   end
+
+  def test_generate_number_not_returning_array_when_inv_cdf_not_implemented
+    c = Class.new(Croupier::Distribution) do
+      def generate_sample n
+        [1]*n
+      end
+    end
+    a = c.new
+    assert_kind_of Numeric, a.generate_number
+  end
 end
