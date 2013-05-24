@@ -7,7 +7,7 @@ context('Kolmogorov-Smirnov test for default (location, scale) = (0,1)')
   croupier_cauchy <- read.table("../generated_samples/cauchy_0_1.data")
   ks_result<-ks.test(croupier_cauchy$V1, "pcauchy")
 
-  test_that("p-value > 0.05", {
+  test_that("p-value > 0.05, cauchy, location=0, scale=1", {
     expect_true(ks_result$p.value > 0.05)
   })
 
@@ -19,7 +19,7 @@ context('Kolmogorov-Smirnov test for given (location, scale) = (12, 3)')
   croupier_cauchy <- read.table("../generated_samples/cauchy_12_3.data")
   ks_result<-ks.test(croupier_cauchy$V1, "pcauchy", location=12, scale=3)
 
-  test_that("p-value > 0.05", {
+  test_that("p-value > 0.05, cauchy, location=12, scale=3", {
     expect_true(ks_result$p.value > 0.05)
   })
 
