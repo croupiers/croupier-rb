@@ -43,10 +43,10 @@ module Croupier
         v_0 = Math::E / ( delta  + Math::E )
         eta = 1; xi = 0;
 
-        while eta > (xi ** (delta - 1)) * (Math::E ** -xi)
+        begin
           # Generate thre independent uniformly distributed
           # on interval (0,1]random variables
-          v1 = 1 - rand; v2 = 1 - rand; v3 = 1 - rand;
+          v_1 = 1 - rand; v_2 = 1 - rand; v_3 = 1 - rand;
 
           # Generate a new xi.
           if v_1 < v_0
@@ -56,7 +56,7 @@ module Croupier
             xi = 1 - Math.log(v_2)
             eta = v_3 * (Math::E ** (-xi))
           end
-        end
+        end while eta > (xi ** (delta - 1)) * (Math::E ** -xi)
 
         xi
       end
