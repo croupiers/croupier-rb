@@ -1,4 +1,4 @@
-source :rubygems
+source "https://rubygems.org"
 
 # Specify dependencies in croupier.gemspec
 gemspec
