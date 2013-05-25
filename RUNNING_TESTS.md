@@ -34,7 +34,7 @@ Other R packages needed:
     * triangle
     * vcd
 
-The test script will try to intall all dependencies if they are not found in your R installation.
+The test script will try to install all dependencies if they are not found in your R installation.
 You can run the test/testsuite.R file:
 
 Using Rscript:

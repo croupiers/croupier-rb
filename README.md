@@ -42,6 +42,7 @@ Current version implements the following distributions:
 * Cauchy
 * Degenerate
 * Exponential
+* Gamma
 * Geometric
 * Negative binomial
 * Normal
