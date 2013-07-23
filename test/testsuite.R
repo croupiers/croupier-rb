@@ -1,7 +1,7 @@
 #!/usr/bin/env Rscript
 #
 # This script runs all the R tests of the croupier gem for all the distributions.
-# 
+#
 # Running the script:
 #  Option 1, Via Rscript:
 #    $> Rscript testsuite.R
@@ -11,11 +11,11 @@
 #
 # Dependencies:
 # In order to run the tests you need to have installed the following packages:
-# 
+#
 #   - testthat
 #   - triangle
 #   - vcd
-# 
+#
 # Croupier will try to install them automatically if they are not included
 # in your R installation.
 
