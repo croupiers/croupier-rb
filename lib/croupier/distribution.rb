@@ -68,6 +68,14 @@ module Croupier
     def self.cli_name
       ''
     end
+
+    def to_enum
+      Enumerator.new do |y|
+        loop do
+          y << generate_number
+        end
+      end
+    end
   end
 
 end

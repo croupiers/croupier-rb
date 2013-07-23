@@ -14,4 +14,10 @@ class TestDistributionClass < MiniTest::Unit::TestCase
       assert_equal 5.34, dist.generate_number
     end
   end
+
+  def test_to_enum
+    enum = Croupier::Distributions::Degenerate.new(constant: 5).to_enum
+    assert_kind_of Enumerator, enum
+    assert_equal [5,5,5], enum.take(3)
+  end
 end
