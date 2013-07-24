@@ -84,6 +84,13 @@ To get a list of all available distributions/methods in Distributions module cal
 
     Croupier::Distributions.list
 
+Since 1.6.0, distributions have a ```to_enum``` method that return an (infinity) enumerator, so you
+can use any Enumerable method on it:
+
+    dist = Croupier::Distributions.exponential(:lambda => 17).to_enum
+    dist.each_slice(2).take(3)
+    => [[0.7455570432863594, 1.6543154039789472], [4.261950709816685, 0.2860058032480469], [1.4761279576207826, 0.6433699882662834]]
+
 ## How to generate a new distribution.
 
 There are several ways. The easiest one is to override ```generate_number``` or ```generate_sample``` (one is enough).
