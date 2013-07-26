@@ -84,7 +84,7 @@ To get a list of all available distributions/methods in Distributions module cal
 
     Croupier::Distributions.list
 
-Since 1.6.0, distributions have a ```to_enum``` method that return an (infinity) enumerator, so you
+Distributions have a ```to_enum``` method that return an (infinity) enumerator, so you
 can use any Enumerable method on it:
 
     dist = Croupier::Distributions.exponential(:lambda => 17).to_enum
