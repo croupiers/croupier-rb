@@ -6,8 +6,9 @@ module Croupier
     # Discrete probability distribution that returns the same value.
     class Degenerate < ::Croupier::Distribution
 
+      distribution_name "Degenerate distribution"
+
       def initialize(options={})
-        @name = "Degenerate distribution"
         @description = "Discrete probability distribution that returns the same value each time."
         configure(options)
       end

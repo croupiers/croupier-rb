@@ -7,8 +7,9 @@ module Croupier
     #
     class Cauchy < ::Croupier::Distribution
 
+      distribution_name "Cauchy distribution"
+
       def initialize(options={})
-        @name = "Cauchy distribution"
         @description = "Continuous probability distribution describing resonance behavior"
         configure(options)
         raise Croupier::InputParamsError, "Invalid scale value, it must be positive" unless params[:scale] > 0

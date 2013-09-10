@@ -8,8 +8,9 @@ module Croupier
     # Equivalent to a Binomial(1,p)
     class Bernoulli < ::Croupier::Distribution
 
+      distribution_name "Bernoulli distribution"
+
       def initialize(options={})
-        @name = "Bernoulli distribution"
         @description = "Discrete probability distribution taking value 1 with success probability p and value 0 with failure probability 1-p."
         configure(options)
         raise Croupier::InputParamsError, "Probability of success must be in the interval [0,1]" if params[:success] > 1 || params[:success] < 0

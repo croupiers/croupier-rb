@@ -7,8 +7,9 @@ module Croupier
     #
     class CreditCard < ::Croupier::Distribution
 
+      distribution_name "CreditCard distribution"
+
       def initialize(options={})
-        @name = "CreditCard distribution"
         @description = "Generates random credit card numbers."
         configure(options)
       end

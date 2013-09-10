@@ -7,8 +7,9 @@ module Croupier
     # (defaults to 1) and scale (defaults to 1).
     class Gamma < ::Croupier::Distribution
 
+      distribution_name "Gamma distribution"
+
       def initialize(options={})
-        @name = "Gamma distribution"
         @description = "Family of continuous distributions with two parameters, shape and scale"
         configure(options)
       end

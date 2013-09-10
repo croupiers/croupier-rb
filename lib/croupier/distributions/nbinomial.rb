@@ -10,8 +10,9 @@ module Croupier
     # Wikipedia -- http://en.wikipedia.org/wiki/Negative_binomial_distribution
     class Nbinomial < ::Croupier::Distribution
 
+      distribution_name "Negative binomial distribution"
+
       def initialize(options={})
-        @name = "Negative binomial distribution"
         @description = "Discrete probability distribution of the number of successes in a sequence of Bernoulli trials before a specified (non-random) number of failures (denoted size) occur."
         configure(options)
         raise Croupier::InputParamsError, "Probability of success must be in the interval [0,1]" if params[:success] > 1 || params[:success] < 0

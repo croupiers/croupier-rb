@@ -11,8 +11,9 @@ module Croupier
     # Wikipedia http://en.wikipedia.org/wiki/Poisson_distribution
     class Poisson < ::Croupier::Distribution
 
+      distribution_name "Poisson distribution"
+
       def initialize(options={})
-        @name = "Poisson distribution"
         @description = "Discrete probability distribution that expresses the probability of a given number of events occurring in a fixed interval of time."
         configure(options)
       end

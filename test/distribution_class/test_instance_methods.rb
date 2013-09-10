@@ -1,11 +1,19 @@
 require "minitest/autorun"
 require "croupier"
-class TestDistributionClass < MiniTest::Unit::TestCase
+class TestInstanceMethods < MiniTest::Unit::TestCase
 
   def test_distribution_has_name_and_description
     dist = Croupier::Distribution.new
     assert_respond_to dist, 'name'
     assert_respond_to dist, 'description'
+  end
+
+  def test_name_returns_distribution_name
+    dist = Class.new Croupier::Distribution do
+      distribution_name "Dist"
+    end
+    sample = dist.new
+    assert_equal "Dist", sample.name
   end
 
   def test_distribution_accepts_parameter_configuration

@@ -7,8 +7,9 @@ module Croupier
     # is a, upper limit b and mode c (a <= c <= b).
     class Triangular < ::Croupier::Distribution
 
+      distribution_name "Triangular distribution"
+
       def initialize(options={})
-        @name = "Triangular distribution"
         @description = "Continuous probability distribution whose lower limit is a, upper limit b and mode c (a <= c <= b)"
         configure(options)
         raise Croupier::InputParamsError, "Invalid interval values" if params[:a] >= params[:b]

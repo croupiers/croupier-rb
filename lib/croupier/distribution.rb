@@ -8,11 +8,26 @@ module Croupier
     attr_accessor :parameters
     attr_reader :name, :description
 
+    class << self
+      # Sets the name property of the distribution.
+      #
+      # @param distribution_name [String] the name of the distribution
+      # @return [String] current distribution name
+      def distribution_name distribution_name=nil
+        @distribution_name = distribution_name if distribution_name
+        @distribution_name
+      end
+    end
+
     # Initializes Distribution object and adds received options to the distribution parameters.
     def initialize(options={})
       @name = nil
       @description = nil
       configure(options)
+    end
+
+    def name
+      self.class.distribution_name
     end
 
     # Merge the hash of options into the default distribution parameters

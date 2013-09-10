@@ -8,8 +8,9 @@ module Croupier
     #
     class Uniform < ::Croupier::Distribution
 
+      distribution_name "Uniform distribution"
+
       def initialize(options={})
-        @name = "Uniform distribution"
         @description = "Continuous distribution on [a,b] (defaults to [0,1]) where all points in the interval are equally likely"
         configure(options)
       end
