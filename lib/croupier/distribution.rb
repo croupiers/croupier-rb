@@ -6,7 +6,7 @@ module Croupier
   #
   class Distribution
     attr_accessor :parameters
-    attr_reader :name, :description
+    attr_reader :description
 
     class << self
       # Sets the name property of the distribution.
@@ -26,6 +26,8 @@ module Croupier
       configure(options)
     end
 
+    # Alias for `self.class.distribution_name`
+    # @return [String] distribution name
     def name
       self.class.distribution_name
     end
