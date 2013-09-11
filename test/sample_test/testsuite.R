@@ -33,5 +33,5 @@ if(require('vcd') == FALSE) {
   require('vcd')
 }
 options(warn=-1)
-test_dir("./distributions/R_tests/")
+test_dir("./R_tests/")
 options(warn=0)
