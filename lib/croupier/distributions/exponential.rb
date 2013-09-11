@@ -10,8 +10,9 @@ module Croupier
 
       distribution_name "Exponential distribution"
 
+      distribution_description "Continuous probability distribution with a lambda param rate describing the time between events in a Poisson process"
+
       def initialize(options={})
-        @description = "Continuous probability distribution with a lambda param rate describing the time between events in a Poisson process"
         configure(options)
         raise Croupier::InputParamsError, "Invalid interval values" if params[:lambda] <= 0
       end

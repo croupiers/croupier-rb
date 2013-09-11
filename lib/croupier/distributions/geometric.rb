@@ -14,8 +14,9 @@ module Croupier
 
       distribution_name "Geometric distribution"
 
+      distribution_description "Discrete probability distribution that expresses the number of X Bernoulli trials needed to get one success, supported on the set { 1, 2, 3, ...}"
+
       def initialize(options={})
-        @description = "Discrete probability distribution that expresses the number of X Bernoulli trials needed to get one success, supported on the set { 1, 2, 3, ...}"
         configure(options)
         raise Croupier::InputParamsError, "Probability of success must be in the interval [0,1]" if params[:success] > 1 || params[:success] < 0
       end

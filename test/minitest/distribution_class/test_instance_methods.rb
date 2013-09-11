@@ -16,6 +16,14 @@ class TestInstanceMethods < MiniTest::Unit::TestCase
     assert_equal "Dist", sample.name
   end
 
+  def test_description_returns_distribution_description
+    dist = Class.new Croupier::Distribution do
+      distribution_description "Desc"
+    end
+    sample = dist.new
+    assert_equal "Desc", sample.description
+  end
+
   def test_distribution_accepts_parameter_configuration
     dist = Croupier::Distribution.new
     assert_equal dist.parameters, dist.default_parameters

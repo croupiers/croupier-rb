@@ -9,8 +9,9 @@ module Croupier
 
       distribution_name "CreditCard distribution"
 
+      distribution_description "Generates random credit card numbers."
+
       def initialize(options={})
-        @description = "Generates random credit card numbers."
         configure(options)
       end
 

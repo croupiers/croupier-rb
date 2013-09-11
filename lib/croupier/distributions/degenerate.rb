@@ -8,8 +8,9 @@ module Croupier
 
       distribution_name "Degenerate distribution"
 
+      distribution_description "Discrete probability distribution that returns the same value each time."
+
       def initialize(options={})
-        @description = "Discrete probability distribution that returns the same value each time."
         configure(options)
       end
 

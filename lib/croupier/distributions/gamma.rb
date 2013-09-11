@@ -9,8 +9,9 @@ module Croupier
 
       distribution_name "Gamma distribution"
 
+      distribution_description "Family of continuous distributions with two parameters, shape and scale"
+
       def initialize(options={})
-        @description = "Family of continuous distributions with two parameters, shape and scale"
         configure(options)
       end
 

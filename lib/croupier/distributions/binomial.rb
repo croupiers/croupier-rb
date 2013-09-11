@@ -10,8 +10,9 @@ module Croupier
 
       distribution_name "Binomial distribution"
 
+      distribution_description "Discrete probability distribution of the number of successes in a sequence of Bernoulli trials."
+
       def initialize(options={})
-        @description = "Discrete probability distribution of the number of successes in a sequence of Bernoulli trials."
         configure(options)
         raise Croupier::InputParamsError, "Probability of success must be in the interval [0,1]" if params[:success] > 1 || params[:success] < 0
       end

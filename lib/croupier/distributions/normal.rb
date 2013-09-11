@@ -10,8 +10,9 @@ module Croupier
 
       distribution_name "Normal distribution"
 
+      distribution_description "Continuous distribution (mu,sigma) (defaults to (0,1) ) where mu is the mean and sigma the standard deviation."
+
       def initialize(options={})
-        @description = "Continuous distribution (mu,sigma) (defaults to (0,1) ) where mu is the mean and sigma the standard deviation."
         configure(options)
       end
 
