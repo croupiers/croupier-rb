@@ -2,6 +2,9 @@ module Croupier
 
   module DistributionGenerators
 
+    # Call `with_enumerator` with a block
+    # that will be called as the parameter for
+    # Enumerator.new
     class WithEnumeratorGenerator < ::Croupier::DistributionGenerator
 
       method_name "with_enumerator"
