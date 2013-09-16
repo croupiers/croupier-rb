@@ -33,6 +33,12 @@ class TestDistributionClassClassMethods < MiniTest::Unit::TestCase
     end
   end
 
+  def distribution_subclass_with_cli_name name
+    Class.new Croupier::Distribution do
+      cli_name name
+    end
+  end
+
   def test_name_setter_adds_the_name
     a = distribution_subclass_with_name "My name"
     assert_equal "My name", a.distribution_name
@@ -59,7 +65,20 @@ class TestDistributionClassClassMethods < MiniTest::Unit::TestCase
     assert_nil Croupier::Distribution.distribution_description
   end
 
-  def test_cli_options_setter_adds_the_description
+  def test_cli_name_setter_adds_the_cli_name
+    a = distribution_subclass_with_cli_name "name"
+    assert_equal "name", a.cli_name
+  end
+
+  def test_cli_name_sets_separated_names_for_each_subclass
+    a = distribution_subclass_with_cli_name "a"
+    b = distribution_subclass_with_cli_name "b"
+    assert_equal "a", a.cli_name
+    assert_equal "b", b.cli_name
+    assert_nil Croupier::Distribution.cli_name
+  end
+
+  def test_cli_options_setter_adds_the_options
     opts = Hash.new
     a = distribution_subclass_with_cli_options opts
     assert_equal opts, a.cli_options
@@ -72,7 +91,7 @@ class TestDistributionClassClassMethods < MiniTest::Unit::TestCase
     assert_equal 0.7, a.default_parameters[:b]
   end
 
-  def test_cli_options_sets_separated_descriptions_for_each_subclass
+  def test_cli_options_sets_separated_cli_options_for_each_subclass
     ha = Hash.new
     hb = Hash.new
     a = distribution_subclass_with_cli_options ha

@@ -12,6 +12,8 @@ module Croupier
 
       distribution_description "Continuous distribution (mu,sigma) (defaults to (0,1) ) where mu is the mean and sigma the standard deviation."
 
+      cli_name "normal"
+
       cli_options({
         options: [
           [:mean, 'mean of the distribution', {type: :float, default: 0.0}],
@@ -43,10 +45,6 @@ module Croupier
 
         # Adjust length
         n.odd? ? gen[0..-2] : gen
-      end
-
-      def self.cli_name
-        "normal"
       end
     end
   end

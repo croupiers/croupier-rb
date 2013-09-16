@@ -16,6 +16,8 @@ module Croupier
 
       distribution_description "Discrete probability distribution that expresses the number of X Bernoulli trials needed to get one success, supported on the set { 1, 2, 3, ...}"
 
+      cli_name "geometric"
+
       cli_options({
         options: [
           [:success, 'success probability of each trial', {type: :float, short: "-p", default: 0.5}]
@@ -32,10 +34,6 @@ module Croupier
       # but it generates the distribution from an uniform.
       def inv_cdf n
         (Math.log(1-n) / Math.log(1-params[:success])).ceil
-      end
-
-      def self.cli_name
-        "geometric"
       end
     end
   end

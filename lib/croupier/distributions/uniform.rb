@@ -12,6 +12,8 @@ module Croupier
 
       distribution_description "Continuous distribution on [a,b] (defaults to [0,1]) where all points in the interval are equally likely"
 
+      cli_name "uniform"
+
       cli_options({
         options: [
           [:a, 'interval start value', {type: :float, default: 0.0}],
@@ -31,10 +33,6 @@ module Croupier
 
       def default_parameters
         {a: 0.0, b: 1.0}
-      end
-
-      def self.cli_name
-        "uniform"
       end
 
       def self.cli_options

@@ -15,6 +15,8 @@ module Croupier
 
       distribution_description "Discrete probability distribution that expresses the probability of a given number of events occurring in a fixed interval of time."
 
+      cli_name "poisson"
+
       cli_options({
         options: [
           [:lambda, 'rate parameter (equal to the mean of the distribution)', {type: :integer, default: 50}]
@@ -34,10 +36,6 @@ module Croupier
           k += 1;
         end
         k-1
-      end
-
-      def self.cli_name
-        "poisson"
       end
     end
   end

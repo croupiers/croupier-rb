@@ -14,6 +14,8 @@ module Croupier
 
       distribution_description "Discrete probability distribution of the number of successes in a sequence of Bernoulli trials before a specified (non-random) number of failures (denoted size) occur."
 
+      cli_name "nbinomial"
+
       cli_options({
         options: [
           [:size, 'number of errors', {type: :integer, default: 1}],
@@ -35,10 +37,6 @@ module Croupier
           # this way it is equivalent to:
           # sample.map{|x| x - 1}.inject(&:+)
         end
-      end
-
-      def self.cli_name
-        "nbinomial"
       end
 
       private

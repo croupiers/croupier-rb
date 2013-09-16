@@ -12,6 +12,8 @@ module Croupier
 
       distribution_description "Discrete probability distribution of the number of successes in a sequence of Bernoulli trials."
 
+      cli_name "binomial"
+
       cli_options({
         options: [
           [:size, 'number of trials', {type: :integer, default: 1}],
@@ -34,10 +36,6 @@ module Croupier
           break if s > params[:size]
         end
         x
-      end
-
-      def self.cli_name
-        "binomial"
       end
 
       private

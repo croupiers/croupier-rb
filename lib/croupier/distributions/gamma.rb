@@ -11,6 +11,8 @@ module Croupier
 
       distribution_description "Family of continuous distributions with two parameters, shape and scale"
 
+      cli_name "gamma"
+
       cli_options({
         options: [
           [:shape, 'shape of the distribution', {type: :float, default: 1.0}],
@@ -25,10 +27,6 @@ module Croupier
 
       def generate_number
         params[:scale] * (gen_xi - (1..params[:shape].floor).map { Math.log(1 - rand) }.inject(&:+) )
-      end
-
-      def self.cli_name
-        "gamma"
       end
 
       protected

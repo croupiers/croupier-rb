@@ -12,6 +12,8 @@ module Croupier
 
       distribution_description "Continuous probability distribution with a lambda param rate describing the time between events in a Poisson process"
 
+      cli_name "exponential"
+
       cli_options({
         options: [
           [:lambda, 'rate param', {type: :float, default: 1.0}]
@@ -26,10 +28,6 @@ module Croupier
 
       def inv_cdf n
         (-1/params[:lambda]) * Math.log(n)
-      end
-
-      def self.cli_name
-        "exponential"
       end
     end
   end

@@ -11,6 +11,8 @@ module Croupier
 
       distribution_description "Continuous probability distribution whose lower limit is a, upper limit b and mode c (a <= c <= b)"
 
+      cli_name "triangular"
+
       cli_options({
         options: [
           [:a, 'lower limit', {type: :float, default: 0.0}],
@@ -36,10 +38,6 @@ module Croupier
         else
           params[:b] - Math.sqrt( (1-n) * (params[:b] - params[:a]) * (params[:b] - params[:c]) )
         end
-      end
-
-      def self.cli_name
-        "triangular"
       end
     end
   end

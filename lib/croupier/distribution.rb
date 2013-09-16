@@ -66,6 +66,15 @@ module Croupier
         @cli_options || {}
       end
 
+      # Sets the cli_name if given
+      #
+      # @param cli_name [String] new cli name
+      # @return [String] current cli name
+      def cli_name cli_name=nil
+        @cli_name = cli_name if cli_name
+        @cli_name
+      end
+
       def default_parameters
         Hash[(cli_options[:options]||{}).map do |name, desc, hash|
           [name,hash[:default]]
@@ -131,11 +140,6 @@ module Croupier
     # convenience method for lazy programmers
     def params
       @parameters
-    end
-
-    # Defines the name of this Distribution to be used from the CLI.
-    def self.cli_name
-      ''
     end
 
     def to_enum

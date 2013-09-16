@@ -10,6 +10,8 @@ module Croupier
 
       distribution_description "Discrete probability distribution that returns the same value each time."
 
+      cli_name "degenerate"
+
       cli_options({
         options: [
           [:constant, 'value to be returned', {type: :float, default: 42.0}]
@@ -23,10 +25,6 @@ module Croupier
 
       def generate_number
         params[:constant]
-      end
-
-      def self.cli_name
-        "degenerate"
       end
     end
   end

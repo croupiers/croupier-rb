@@ -11,6 +11,8 @@ module Croupier
       distribution_name "Bernoulli distribution"
       distribution_description "Discrete probability distribution taking value 1 with success probability p and value 0 with failure probability 1-p."
 
+      cli_name "bernoulli"
+
       cli_options({
         options: [
           [:success, 'success probability', {type: :float, short: "-p", default: 0.5}]
@@ -25,10 +27,6 @@ module Croupier
 
       def generate_number
         binomial_1_p.generate_number
-      end
-
-      def self.cli_name
-        "bernoulli"
       end
       
       private

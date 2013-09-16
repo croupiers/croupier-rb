@@ -11,6 +11,8 @@ module Croupier
 
       distribution_description "Continuous probability distribution describing resonance behavior"
 
+      cli_name "cauchy"
+
       cli_options({
         options: [
           [:location, 'location param', {type: :float, default:0.0}],
@@ -26,10 +28,6 @@ module Croupier
 
       def inv_cdf n
         params[:location] + (params[:scale] * Math.tan(Math::PI * (0.5 - n)))
-      end
-
-      def self.cli_name
-        "cauchy"
       end
     end
   end

@@ -11,6 +11,8 @@ module Croupier
 
       distribution_description "Generates random credit card numbers."
 
+      cli_name "credit_card"
+
       cli_options({
         options: [
           [:master_card, 'master card type', {type: :boolean, default: false}],
@@ -31,10 +33,6 @@ module Croupier
         n += generate_random_string(15 - n.size)
         n = n[0..14]
         n + check_digit_for(n).to_s
-      end
-
-      def self.cli_name
-        "credit_card"
       end
 
       def check_digit_for(n)
