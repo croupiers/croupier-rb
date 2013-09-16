@@ -6,6 +6,7 @@ module Croupier
   #
   class Distribution
     attr_accessor :parameters
+    attr_accessor :generator
 
     class << self
       # Sets the name property of the distribution.
@@ -27,11 +28,41 @@ module Croupier
         @distribution_description = description if description
         @distribution_description
       end
+
+      # Sets the generator class for this distribution, if given
+      #
+      # @param generator_class [Class] class for the generator for this distribution
+      # @return [Class] current generator class
+      def generator_class generator_class=nil
+        @generator_class = generator_class if generator_class
+        @generator_class
+      end
+
+      # Sets the generator block for this distribution, if given
+      #
+      # @param block [Proc] block for the generator
+      # @return [Proc] current generator block
+      def generator_block &block
+        @generator_block = block if block_given?
+        @generator_block
+      end
+
+      def method_missing(method, *args, &block) # :nodoc:
+        return super unless self.respond_to?(method)
+        generator = ::Croupier::DistributionGenerators.all.find{|d| d.method_name == method.to_s}
+        self.generator_class generator
+        self.generator_block &block
+      end
+
+      def respond_to?(method, include_private = false) # :nodoc:
+        ::Croupier::DistributionGenerators.list.include?(method.to_s) || super(method, include_private)
+      end
     end
 
     # Initializes Distribution object and adds received options to the distribution parameters.
     def initialize(options={})
       configure(options)
+      create_generator
     end
 
     # Alias for `self.class.distribution_name`
@@ -103,6 +134,13 @@ module Croupier
         loop do
           y << generate_number
         end
+      end
+    end
+
+    protected
+    def create_generator
+      if self.class.generator_class && self.class.generator_block
+        @generator = self.class.generator_class.new self, &self.class.generator_block
       end
     end
   end

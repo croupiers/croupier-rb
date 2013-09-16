@@ -1,6 +1,9 @@
 require 'croupier/version'
 require 'croupier/cli/trollop'
 require 'croupier/exceptions'
+require 'croupier/distribution_generator'
+require 'croupier/distribution_generators'
+Dir[File.join(File.dirname(__FILE__), "./croupier/distribution_generators/*.rb")].each {|f| require f}
 require 'croupier/distribution'
 require 'croupier/distributions'
 Dir[File.join(File.dirname(__FILE__), "./croupier/distributions/*.rb")].each {|f| require f}
