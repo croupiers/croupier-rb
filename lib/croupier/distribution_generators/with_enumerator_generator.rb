@@ -11,7 +11,9 @@ module Croupier
       end
 
       def to_enum
-        self.distribution.instance_exec(&self.block)
+        Enumerator.new do |y|
+          self.distribution.instance_exec(y,&self.block)
+        end
       end
     end
   end
