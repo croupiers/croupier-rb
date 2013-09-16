@@ -12,6 +12,14 @@ module Croupier
 
       distribution_description "Discrete probability distribution of the number of successes in a sequence of Bernoulli trials."
 
+      cli_options({
+        options: [
+          [:size, 'number of trials', {type: :integer, default: 1}],
+          [:success, 'success probability of each trial', {type: :float, short: "-p", default: 0.5}]
+        ],
+        banner: "Binomial distribution. Discrete probability distribution of the number of successes in a sequence of Bernoulli trials."
+      })
+
       def initialize(options={})
         configure(options)
         raise Croupier::InputParamsError, "Probability of success must be in the interval [0,1]" if params[:success] > 1 || params[:success] < 0
@@ -28,21 +36,8 @@ module Croupier
         x
       end
 
-      def default_parameters
-        {:success => 0.5, :size => 1}
-      end
-
       def self.cli_name
         "binomial"
-      end
-
-      def self.cli_options
-        {:options => [
-           [:size, 'number of trials', {:type => :integer, :default => 1}],
-           [:success, 'success probability of each trial', {:type=>:float, :short => "-p", :default => 0.5}]
-         ],
-         :banner => "Binomial distribution. Discrete probability distribution of the number of successes in a sequence of Bernoulli trials."
-        }
       end
 
       private

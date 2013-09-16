@@ -27,6 +27,12 @@ class TestDistributionClassClassMethods < MiniTest::Unit::TestCase
     end
   end
 
+  def distribution_subclass_with_cli_options opts
+    Class.new Croupier::Distribution do
+      cli_options opts
+    end
+  end
+
   def test_name_setter_adds_the_name
     a = distribution_subclass_with_name "My name"
     assert_equal "My name", a.distribution_name
@@ -51,6 +57,29 @@ class TestDistributionClassClassMethods < MiniTest::Unit::TestCase
     assert_equal "A", a.distribution_description
     assert_equal "B", b.distribution_description
     assert_nil Croupier::Distribution.distribution_description
+  end
+
+  def test_cli_options_setter_adds_the_description
+    opts = Hash.new
+    a = distribution_subclass_with_cli_options opts
+    assert_equal opts, a.cli_options
+  end
+
+  def test_default_parameters_correctly_computed_from_cli_options
+    opts = {banner: 'Something', options: [[:a, "A", {type: :float, default: 0.5}], [:b, "B", {type: :float, default: 0.7}]]}
+    a = distribution_subclass_with_cli_options opts
+    assert_equal 0.5, a.default_parameters[:a]
+    assert_equal 0.7, a.default_parameters[:b]
+  end
+
+  def test_cli_options_sets_separated_descriptions_for_each_subclass
+    ha = Hash.new
+    hb = Hash.new
+    a = distribution_subclass_with_cli_options ha
+    b = distribution_subclass_with_cli_options hb
+    assert_equal ha, a.cli_options
+    assert_equal hb, b.cli_options
+    assert_empty Croupier::Distribution.cli_options
   end
 
   def test_responds_to_generators_methods

@@ -27,7 +27,7 @@ class TestDistributionClassInstanceMethods < MiniTest::Unit::TestCase
   def test_distribution_accepts_parameter_configuration
     dist = Croupier::Distribution.new
     assert_equal dist.parameters, dist.default_parameters
-    dist.configure({:larry => 'bird', :leonard => 'euler'})
+    dist.configure({larry: 'bird', leonard: 'euler'})
     refute_equal dist.parameters, dist.default_parameters
     assert_equal dist.parameters[:larry], 'bird'
     assert_equal dist.parameters[:leonard], 'euler'

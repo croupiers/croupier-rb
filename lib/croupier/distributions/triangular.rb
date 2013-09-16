@@ -11,6 +11,15 @@ module Croupier
 
       distribution_description "Continuous probability distribution whose lower limit is a, upper limit b and mode c (a <= c <= b)"
 
+      cli_options({
+        options: [
+          [:a, 'lower limit', {type: :float, default: 0.0}],
+          [:b, 'upper limit', {type: :float, default: 1.0}],
+          [:c, 'mode', {type: :float, default: 0.5}]
+        ],
+        banner: "Triangular distribution. Continuous distribution whose support is the interval (a,b), with mode c."
+      })
+
       def initialize(options={})
         configure(options)
         raise Croupier::InputParamsError, "Invalid interval values" if params[:a] >= params[:b]
@@ -29,22 +38,8 @@ module Croupier
         end
       end
 
-      def default_parameters
-        {:a => 0.0, :b => 1.0, :c => 0.5}
-      end
-
       def self.cli_name
         "triangular"
-      end
-
-      def self.cli_options
-        {:options => [
-           [:a, 'lower limit', {:type=>:float, :default => 0.0}],
-           [:b, 'upper limit', {:type=>:float, :default => 1.0}],
-           [:c, 'mode'       , {:type=>:float, :default => 0.5}]
-         ],
-         :banner => "Triangular distribution. Continuous distribution whose support is the interval (a,b), with mode c."
-        }
       end
     end
   end

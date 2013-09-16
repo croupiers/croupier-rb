@@ -11,6 +11,13 @@ module Croupier
       distribution_name "Bernoulli distribution"
       distribution_description "Discrete probability distribution taking value 1 with success probability p and value 0 with failure probability 1-p."
 
+      cli_options({
+        options: [
+          [:success, 'success probability', {type: :float, short: "-p", default: 0.5}]
+        ],
+        banner: "Bernoulli distribution. Discrete probability distribution taking value 1 with success probability p and value 0 with failure probability 1-p."
+      })
+
       def initialize(options={})
         configure(options)
         raise Croupier::InputParamsError, "Probability of success must be in the interval [0,1]" if params[:success] > 1 || params[:success] < 0
@@ -20,20 +27,8 @@ module Croupier
         binomial_1_p.generate_number
       end
 
-      def default_parameters
-        {:success => 0.5}
-      end
-
       def self.cli_name
         "bernoulli"
-      end
-
-      def self.cli_options
-        {:options => [
-           [:success, 'success probability', {:type=>:float, :short => "-p", :default => 0.5}]
-         ],
-         :banner => "Bernoulli distribution. Discrete probability distribution taking value 1 with success probability p and value 0 with failure probability 1-p."
-        }
       end
       
       private

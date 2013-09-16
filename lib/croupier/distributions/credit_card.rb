@@ -11,6 +11,17 @@ module Croupier
 
       distribution_description "Generates random credit card numbers."
 
+      cli_options({
+        options: [
+          [:master_card, 'master card type', {type: :boolean, default: false}],
+          [:american_express, 'american express card type', {type: :boolean, default: false}],
+          [:visa, 'visa card type', {type: :boolean, default: false}],
+          [:discover, 'discover card type', {type: :boolean, default: false}],
+          [:initial_values, 'initial values for the credit card. They will be place after card type if one is given.', {type: :string, default: ""}]
+        ],
+        banner: "Credit Card distribution. Generate random card numbers"
+      })
+
       def initialize(options={})
         configure(options)
       end
@@ -20,16 +31,6 @@ module Croupier
         n += generate_random_string(15 - n.size)
         n = n[0..14]
         n + check_digit_for(n).to_s
-      end
-
-      def default_parameters
-        {
-          :master_card => false,
-          :american_express => false,
-          :discover => false,
-          :visa => false,
-          :initial_values => ""
-        }
       end
 
       def self.cli_name
@@ -69,18 +70,6 @@ module Croupier
         return 5 if params[:master_card]
         return 6 if params[:discover]
         ""
-      end
-
-      def self.cli_options
-        {:options => [
-           [:master_card, 'master card type', {:type=>:boolean, :default => false}],
-           [:american_express, 'american express card type', {:type=>:boolean, :default => false}],
-           [:visa, 'visa card type', {:type=>:boolean, :default => false}],
-           [:discover, 'discover card type', {:type=>:boolean, :default => false}],
-           [:initial_values, 'initial values for the credit card. They will be place after card type if one is given.', {:type=>:string, :default => ""}]
-         ],
-         :banner => "Credit Card distribution. Generate random card numbers"
-        }
       end
     end
   end

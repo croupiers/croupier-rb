@@ -1,6 +1,6 @@
 #!/bin/bash
 
-OUTPUT_DIR=./test/distributions/generated_samples
+OUTPUT_DIR=./test/sample_test/generated_samples
 mkdir -p $OUTPUT_DIR
 
 echo 'Generating exponentials...'

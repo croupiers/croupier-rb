@@ -16,6 +16,13 @@ module Croupier
 
       distribution_description "Discrete probability distribution that expresses the number of X Bernoulli trials needed to get one success, supported on the set { 1, 2, 3, ...}"
 
+      cli_options({
+        options: [
+          [:success, 'success probability of each trial', {type: :float, short: "-p", default: 0.5}]
+        ],
+        banner: "Geometric distribution. Discrete probability distribution that expresses the number of X Bernoulli trials needed to get one success, supported on the set { 1, 2, 3, ...} }"
+      })
+
       def initialize(options={})
         configure(options)
         raise Croupier::InputParamsError, "Probability of success must be in the interval [0,1]" if params[:success] > 1 || params[:success] < 0
@@ -27,20 +34,8 @@ module Croupier
         (Math.log(1-n) / Math.log(1-params[:success])).ceil
       end
 
-      def default_parameters
-        {:success => 0.5}
-      end
-
       def self.cli_name
         "geometric"
-      end
-
-      def self.cli_options
-        {:options => [
-           [:success, 'success probability of each trial', {:type=>:float, :short => "-p", :default => 0.5}]
-         ],
-         :banner => "Geometric distribution. Discrete probability distribution that expresses the number of X Bernoulli trials needed to get one success, supported on the set { 1, 2, 3, ...} }"
-        }
       end
     end
   end

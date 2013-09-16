@@ -11,6 +11,14 @@ module Croupier
 
       distribution_description "Family of continuous distributions with two parameters, shape and scale"
 
+      cli_options({
+        options: [
+          [:shape, 'shape of the distribution', {type: :float, default: 1.0}],
+          [:scale, 'scale of the distribution', {type: :float, default: 1.0}]
+        ],
+        banner: "Family of continuous distributions with two parameters, shape and scale."
+      })
+
       def initialize(options={})
         configure(options)
       end
@@ -19,21 +27,8 @@ module Croupier
         params[:scale] * (gen_xi - (1..params[:shape].floor).map { Math.log(1 - rand) }.inject(&:+) )
       end
 
-      def default_parameters
-        {:shape => 1.0, :std => 1.0}
-      end
-
       def self.cli_name
         "gamma"
-      end
-
-      def self.cli_options
-        {:options => [
-           [:shape, 'shape of the distribution', {:type=>:float, :default => 1.0}],
-           [:scale, 'scale of the distribution', {:type=>:float, :default => 1.0}]
-         ],
-         :banner => "Family of continuous distributions with two parameters, shape and scale."
-        }
       end
 
       protected
@@ -52,13 +47,13 @@ module Croupier
 
           # Generate a new xi.
           if v_1 < v_0
-            xi = (v_2 ** (1/delta))
-            eta = v_3 * (xi ** (delta - 1))
+            xi = (v_2** (1/delta))
+            eta = v_3 * (xi** (delta - 1))
           else
             xi = 1 - Math.log(v_2)
-            eta = v_3 * (Math::E ** (-xi))
+            eta = v_3 * (Math::E** (-xi))
           end
-        end while eta > (xi ** (delta - 1)) * (Math::E ** -xi)
+        end while eta > (xi** (delta - 1)) * (Math::E** -xi)
 
         xi
       end

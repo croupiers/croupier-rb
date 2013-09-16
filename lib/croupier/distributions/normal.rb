@@ -12,6 +12,14 @@ module Croupier
 
       distribution_description "Continuous distribution (mu,sigma) (defaults to (0,1) ) where mu is the mean and sigma the standard deviation."
 
+      cli_options({
+        options: [
+          [:mean, 'mean of the distribution', {type: :float, default: 0.0}],
+          [:std, 'standard deviation of the distribution', {type: :float, default: 1.0}]
+        ],
+        banner: "Normal distribution. Generate numbers following a continuous distribution in the real line with mean :mean and standard deviation :std."
+      })
+
       def initialize(options={})
         configure(options)
       end
@@ -37,21 +45,8 @@ module Croupier
         n.odd? ? gen[0..-2] : gen
       end
 
-      def default_parameters
-        {:mean => 0, :std => 1}
-      end
-
       def self.cli_name
         "normal"
-      end
-
-      def self.cli_options
-        {:options => [
-           [:mean, 'mean of the distribution', {:type=>:float, :default => 0.0}],
-           [:std, 'standard deviation of the distribution', {:type=>:float, :default => 1.0}]
-         ],
-         :banner => "Normal distribution. Generate numbers following a continuous distribution in the real line with mean :mean and standard deviation :std."
-        }
       end
     end
   end

@@ -47,6 +47,31 @@ module Croupier
         @generator_block
       end
 
+      # Defines a hash with banner and all available CLI options.
+      # It is a hash with two keys:
+      #  :banner =>  A string used as banner in the command line help
+      #  :options => An array of arrays each one representing a CLI option
+      #             with the following format:[:option, 'description', {hash of option params}]
+      #   Example:
+      #   {:banner => "This distribution generates only number 33",
+      #    :options => [
+      #      [:mean, 'The mean of the distribution', {:default => 33}],
+      #      [:median, 'Median of the distribution',{:default => 33.0, :type => :float}]
+      #    ]
+      #   }
+      # @param options [Hash] new cli options
+      # return [Hash] current cli options
+      def cli_options options=nil
+        @cli_options = options if options
+        @cli_options || {}
+      end
+
+      def default_parameters
+        Hash[(cli_options[:options]||{}).map do |name, desc, hash|
+          [name,hash[:default]]
+        end]
+      end
+
       def method_missing(method, *args, &block) # :nodoc:
         return super unless self.respond_to?(method)
         generator = ::Croupier::DistributionGenerators.all.find{|d| d.method_name == method.to_s}
@@ -82,7 +107,7 @@ module Croupier
 
     # Default hash of distribution parameters
     def default_parameters
-      {}
+      self.class.default_parameters
     end
 
     # Main method to generate n random numbers using the current probability distribution
@@ -106,22 +131,6 @@ module Croupier
     # convenience method for lazy programmers
     def params
       @parameters
-    end
-
-    # Defines a hash with banner and all available CLI options.
-    # It is a hash with two keys:
-    #  :banner =>  A string used as banner in the command line help
-    #  :options => An array of arrays each one representing a CLI option
-    #             with the following format:[:option, 'description', {hash of option params}]
-    #   Example:
-    #   {:banner => "This distribution generates only number 33",
-    #    :options => [
-    #      [:mean, 'The mean of the distribution', {:default => 33}],
-    #      [:median, 'Median of the distribution',{:default => 33.0, :type => :float}]
-    #    ]
-    #   }
-    def self.cli_options
-      {:banner => nil, :options=>[]}
     end
 
     # Defines the name of this Distribution to be used from the CLI.
