@@ -23,7 +23,7 @@ module Croupier
       })
 
       def initialize(options={})
-        configure(options)
+        super(options)
         raise Croupier::InputParamsError, "Invalid interval values" if params[:a] >= params[:b]
         if params[:c] < params[:a] || params[:b] <  params[:c]
           warn("Mode is not in the support. Mode value will be change to median.")

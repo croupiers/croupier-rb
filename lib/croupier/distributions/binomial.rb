@@ -23,7 +23,7 @@ module Croupier
       })
 
       def initialize(options={})
-        configure(options)
+        super(options)
         raise Croupier::InputParamsError, "Probability of success must be in the interval [0,1]" if params[:success] > 1 || params[:success] < 0
       end
 

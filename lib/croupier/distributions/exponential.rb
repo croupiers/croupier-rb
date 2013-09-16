@@ -22,7 +22,7 @@ module Croupier
       })
 
       def initialize(options={})
-        configure(options)
+        super(options)
         raise Croupier::InputParamsError, "Invalid interval values" if params[:lambda] <= 0
       end
 

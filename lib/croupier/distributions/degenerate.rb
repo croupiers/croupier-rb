@@ -20,7 +20,7 @@ module Croupier
        })
 
       def initialize(options={})
-        configure(options)
+        super(options)
       end
 
       def generate_number
