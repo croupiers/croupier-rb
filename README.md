@@ -3,7 +3,7 @@
 Croupier generates random samples of numbers with specific probability distributions.
 
 [![Gem Version](https://badge.fury.io/rb/croupier.png)](http://badge.fury.io/rb/croupier)
-[![Build Status](https://secure.travis-ci.org/xuanxu/croupier.png?branch=master)](http://travis-ci.org/xuanxu/croupier)
+[![Build Status](https://secure.travis-ci.org/croupiers/croupier-rb.png?branch=2.0)](http://travis-ci.org/croupiers/croupier-rb)
 
 ## Install
 
@@ -84,7 +84,7 @@ To get a list of all available distributions/methods in Distributions module cal
 
     Croupier::Distributions.list
 
-Since 1.6.0, distributions have a ```to_enum``` method that return an (infinity) enumerator, so you
+Distributions have a ```to_enum``` method that return an (infinity) enumerator, so you
 can use any Enumerable method on it:
 
     dist = Croupier::Distributions.exponential(:lambda => 17).to_enum
