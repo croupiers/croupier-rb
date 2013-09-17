@@ -28,7 +28,7 @@ module Croupier
       def generate_number
         binomial_1_p.generate_number
       end
-      
+
       private
       def binomial_1_p
         @binomial_1_p ||= ::Croupier::Distributions::Binomial.new(:success => params[:success], :size => 1)
