@@ -121,20 +121,12 @@ module Croupier
 
     # Main method to generate n random numbers using the current probability distribution
     def generate_sample(n=1)
-      if self.respond_to? :inv_cdf
-        (1..n).map{ inv_cdf(rand) }
-      else
-        (1..n).map{ generate_number }
-      end
+      self.to_enum.take(n).to_a
     end
 
     # Generates one random number using the current probability distribution
     def generate_number
-      if self.respond_to? :inv_cdf
-        inv_cdf(rand)
-      else
-        generate_sample(1).first
-      end
+      self.to_enum.next
     end
 
     # convenience method for lazy programmers
@@ -143,11 +135,7 @@ module Croupier
     end
 
     def to_enum
-      Enumerator.new do |y|
-        loop do
-          y << generate_number
-        end
-      end
+      @enum ||= @generator.to_enum
     end
 
     protected

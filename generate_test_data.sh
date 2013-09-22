@@ -12,8 +12,8 @@ ruby -Ilib ./bin/croupier normal 10000 --mean 0 --std 1 > $OUTPUT_DIR/normal_0_1
 ruby -Ilib ./bin/croupier normal 10000 --mean 5 --std 6 > $OUTPUT_DIR/normal_5_6.data
 
 echo 'Generating uniforms...'
-ruby -Ilib ./bin/croupier uniform 10000 --a 0 --b 1 > $OUTPUT_DIR/uniform_0_1.data
-ruby -Ilib ./bin/croupier uniform 10000 --a 5 --b 33 > $OUTPUT_DIR/uniform_5_33.data
+ruby -Ilib ./bin/croupier uniform 10000 --included 0 --excluded 1 > $OUTPUT_DIR/uniform_0_1.data
+ruby -Ilib ./bin/croupier uniform 10000 --included 5 --excluded 33 > $OUTPUT_DIR/uniform_5_33.data
 
 echo 'Generating triangulars...'
 ruby -Ilib ./bin/croupier triangular 10000 --a 0 --b 1 --c 0.5 > $OUTPUT_DIR/triangular_0_1_05.data
