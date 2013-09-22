@@ -19,12 +19,14 @@ module Croupier
         banner: "Degenerate distribution. Discrete probability distribution that returns the same value each time."
        })
 
-      def initialize(options={})
-        super(options)
+      with_enumerator do |y|
+        loop do
+          y << params[:constant]
+        end
       end
 
-      def generate_number
-        params[:constant]
+      def initialize(options={})
+        super(options)
       end
     end
   end
