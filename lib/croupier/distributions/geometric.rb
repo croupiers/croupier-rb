@@ -25,15 +25,19 @@ module Croupier
         banner: "Geometric distribution. Discrete probability distribution that expresses the number of X Bernoulli trials needed to get one success, supported on the set { 1, 2, 3, ...} }"
       })
 
+      # Fair point: it is not the inverse of the cdf,
+      # but it generates the distribution from an uniform.
+      inv_cdf do |n|
+        (Math.log(1-n) / Math.log(1-success)).ceil
+      end
+
       def initialize(options={})
         super(options)
         raise Croupier::InputParamsError, "Probability of success must be in the interval [0,1]" if params[:success] > 1 || params[:success] < 0
       end
 
-      # Fair point: it is not the inverse of the cdf,
-      # but it generates the distribution from an uniform.
-      def inv_cdf n
-        (Math.log(1-n) / Math.log(1-params[:success])).ceil
+      def success
+        params[:success]
       end
     end
   end
