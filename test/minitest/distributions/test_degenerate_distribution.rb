@@ -1,6 +1,6 @@
 require "minitest/autorun"
 require "croupier"
-class TestDistributionClass < MiniTest::Unit::TestCase
+class TestDegenerateDistribution < MiniTest::Unit::TestCase
 
   def test_distribution_has_name_and_description
     dist = Croupier::Distributions::Degenerate.new
