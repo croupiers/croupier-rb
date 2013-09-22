@@ -15,29 +15,48 @@ module Croupier
 
       cli_options({
         options: [
-          [:a, 'lower limit', {type: :float, default: 0.0}],
-          [:b, 'upper limit', {type: :float, default: 1.0}],
-          [:c, 'mode', {type: :float, default: 0.5}]
+          [:lower, 'lower limit', {type: :float, short: '-a', default: 0.0}],
+          [:upper, 'upper limit', {type: :float, short: '-b', default: 1.0}],
+          [:mode, 'mode', {type: :float, short: '-c', default: 0.5}]
         ],
         banner: "Triangular distribution. Continuous distribution whose support is the interval (a,b), with mode c."
       })
 
-      def initialize(options={})
-        super(options)
-        raise Croupier::InputParamsError, "Invalid interval values" if params[:a] >= params[:b]
-        if params[:c] < params[:a] || params[:b] <  params[:c]
-          warn("Mode is not in the support. Mode value will be change to median.")
-          params[:c] = (params[:a]+params[:b])/2;
+      inv_cdf do |n|
+        if n < @F_c
+          lower + Math.sqrt(   n   * range * (mode - lower) )
+        else
+          upper - Math.sqrt( (1-n) * range * (upper - mode) )
         end
-        @F_c = (params[:c]-params[:a])/(params[:b]-params[:a])
       end
 
-      def inv_cdf n
-        if n < @F_c
-          params[:a] + Math.sqrt(   n   * (params[:b] - params[:a]) * (params[:c] - params[:a]) )
-        else
-          params[:b] - Math.sqrt( (1-n) * (params[:b] - params[:a]) * (params[:b] - params[:c]) )
+      def initialize(options={})
+        super(options)
+        if params[:lower] >= params[:upper]
+          warn("Lower limit is greater than upper limit. Changing their values.")
+          params[:lower], params[:upper] = params[:upper], params[:lower]
         end
+        if params[:mode] < params[:lower] || params[:upper] <  params[:mode]
+          warn("Mode is not in the support. Mode value will be change to median.")
+          params[:mode] = (params[:lower]+params[:upper])/2.0;
+        end
+        @F_c = (params[:mode]-params[:lower]).to_f/(params[:mode]-params[:lower])
+      end
+
+      def lower
+        params[:lower]
+      end
+
+      def upper
+        params[:upper]
+      end
+
+      def mode
+        params[:mode]
+      end
+
+      def range
+        @range ||= upper - lower
       end
     end
   end

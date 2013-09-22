@@ -16,8 +16,8 @@ ruby -Ilib ./bin/croupier uniform 10000 --included 0 --excluded 1 > $OUTPUT_DIR/
 ruby -Ilib ./bin/croupier uniform 10000 --included 5 --excluded 33 > $OUTPUT_DIR/uniform_5_33.data
 
 echo 'Generating triangulars...'
-ruby -Ilib ./bin/croupier triangular 10000 --a 0 --b 1 --c 0.5 > $OUTPUT_DIR/triangular_0_1_05.data
-ruby -Ilib ./bin/croupier triangular 10000 --a -1 --b 5 --c 4 > $OUTPUT_DIR/triangular_-1_5_4.data
+ruby -Ilib ./bin/croupier triangular 10000 --lower 0 --upper 1 --mode 0.5 > $OUTPUT_DIR/triangular_0_1_05.data
+ruby -Ilib ./bin/croupier triangular 10000 --lower -1 --upper 5 --mode 4 > $OUTPUT_DIR/triangular_-1_5_4.data
 
 echo 'Generating poissons...'
 ruby -Ilib ./bin/croupier poisson 10000 --lambda 5 > $OUTPUT_DIR/poisson_5.data

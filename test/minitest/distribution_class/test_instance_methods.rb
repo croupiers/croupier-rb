@@ -39,37 +39,8 @@ class TestDistributionClassInstanceMethods < MiniTest::Unit::TestCase
   end
 
   def test_distribution_generates_array_of_n_results
-    a = Croupier::Distribution.new
-    def a.generate_number; 15; end
-    assert_equal a.generate_sample(15).size, 15
-  end
-
-  def test_generate_number_calls_inv_cdf_if_present
-    c = Class.new(Croupier::Distribution) do
-      def inv_cdf n; true; end
-      def generate_sample n; false; end
-    end
-    a = c.new
-    assert a.generate_number
-  end
-
-  def test_generate_sample_calls_inv_cdf_if_present
-    c = Class.new(Croupier::Distribution) do
-      def inv_cdf n; true; end
-      def generate_number n; false; end
-    end
-    a = c.new
-    assert a.generate_sample(3).all?
-  end
-
-  def test_generate_number_not_returning_array_when_inv_cdf_not_implemented
-    c = Class.new(Croupier::Distribution) do
-      def generate_sample n
-        [1]*n
-      end
-    end
-    a = c.new
-    assert_kind_of Numeric, a.generate_number
+    u = Croupier::Distributions.uniform
+    assert_equal u.generate_sample(15).size, 15
   end
 
   def test_initialize_creates_a_generator
