@@ -21,13 +21,21 @@ module Croupier
         banner: "Cauchy continuous distribution. Generate numbers following a Cauchy distribution with location and scale parameters"
       })
 
+      inv_cdf do |n|
+        location + (scale * Math.tan( Math::PI * (0.5 - n)))
+      end
+
       def initialize(options={})
         super(options)
         raise Croupier::InputParamsError, "Invalid scale value, it must be positive" unless params[:scale] > 0
       end
 
-      def inv_cdf n
-        params[:location] + (params[:scale] * Math.tan(Math::PI * (0.5 - n)))
+      def location
+        params[:location]
+      end
+
+      def scale
+        params[:scale]
       end
     end
   end
