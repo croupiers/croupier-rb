@@ -24,18 +24,24 @@ module Croupier
         banner: "Poisson distribution. Discrete probability distribution that expresses the probability of a given number of events occurring in a fixed interval of time."
       })
 
+      with_enumerator do |y|
+        l = Math.exp(-lambda)
+        loop do
+          k = 0, p = 1;
+          while p > l
+            p *= ::Croupier.rand
+            k += 1
+          end
+          y << (k-1)
+        end
+      end
+
       def initialize(options={})
         super(options)
       end
 
-      def generate_number
-        l = Math.exp(-params[:lambda])
-        k = 0; p = 1;
-        while p > l
-          p *= rand
-          k += 1;
-        end
-        k-1
+      def lambda
+        params[:lambda]
       end
     end
   end
