@@ -19,7 +19,7 @@ module Croupier
         banner: "Degenerate distribution. Discrete probability distribution that returns the same value each time."
        })
 
-      with_enumerator do |y|
+      enumerator_block do |y|
         loop do
           y << params[:constant]
         end

@@ -24,30 +24,24 @@ module Croupier
         banner: "Negative binomial distribution. Discrete probability distribution of the number of successes in a sequence of Bernoulli trials before a specified (non-random) number of failures (denoted size) occur."
       })
 
+      enumerator do |c|
+        c.geometric(sucess: success).to_enum.each_slice(size).map do |sample|
+          sample.inject(-size, &:+)
+        end
+      end
+
       def initialize(options={})
         super(options)
         raise Croupier::InputParamsError, "Probability of success must be in the interval [0,1]" if params[:success] > 1 || params[:success] < 0
       end
 
-      # Fair point: it is not the inverse of the cdf,
-      # but it generates the distribution from an uniform.
-      def generate_sample n=1
-        generate_geometrics(n).each_slice(params[:size]).map do |sample|
-          sample.inject(-params[:size], &:+) # Inject starts on -size because
-          # this way it is equivalent to:
-          # sample.map{|x| x - 1}.inject(&:+)
-        end
+      def success
+        params[:succes]
       end
 
-      private
-      def base_geometric
-        ::Croupier::Distributions::Geometric.new(success: params[:success])
+      def size
+        params[:size]
       end
-
-      def generate_geometrics(n)
-        base_geometric.generate_sample(params[:size]*n)
-      end
-
     end
   end
 end

@@ -24,7 +24,7 @@ module Croupier
         banner: "Poisson distribution. Discrete probability distribution that expresses the probability of a given number of events occurring in a fixed interval of time."
       })
 
-      with_enumerator do |y|
+      enumerator_block do |y|
         l = Math.exp(-lambda)
         loop do
           k = 0, p = 1;
