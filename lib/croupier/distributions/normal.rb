@@ -22,29 +22,30 @@ module Croupier
         banner: "Normal distribution. Generate numbers following a continuous distribution in the real line with mean :mean and standard deviation :std."
       })
 
+      minimum_sample do
+        x, y = 1 - ::Croupier.rand, 1 - ::Croupier.rand
+        [
+          Math.sqrt(-2*Math.log(x)) * Math.cos(2*Math::PI*y),
+          Math.sqrt(-2*Math.log(x)) * Math.sin(2*Math::PI*y)
+        ]
+      end
+
       def initialize(options={})
         super(options)
       end
 
-      def generate_sample(n=1)
-        sample = n.odd? ? n+1 : n
+      def std
+        params[:std]
+      end
 
-        # Generate
-        gen = (1..sample).map do |x|
-          1 - rand # because uniform need to be in (0,1]
-        end.each_slice(2).flat_map do |x, y|
-          [
-            Math.sqrt(-2*Math.log(x)) * Math.cos(2*Math::PI*y),
-            Math.sqrt(-2*Math.log(x)) * Math.sin(2*Math::PI*y)
-          ]
-        end
+      def mean
+        params[:mean]
+      end
 
-        # Adjust parameters.
-        gen.map!{ |x| x * params[:std] }  if params[:std] != 1
-        gen.map!{ |x| x + params[:mean] } if params[:mean] != 0
-
-        # Adjust length
-        n.odd? ? gen[0..-2] : gen
+      def to_enum
+        @generator.to_enum.
+          map {|x| x * std}.  # Adjust standard deviation
+          map {|x| x + mean}  # Adjust mean
       end
     end
   end
