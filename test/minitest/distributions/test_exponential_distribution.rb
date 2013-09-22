@@ -8,6 +8,6 @@ class TestExponentialDistribution < MiniTest::Unit::TestCase
 
   def test_lambda_returns_params_lambda
     e = exponential lambda: 30.3
-    assert_in_delta 30.3, e.lambda, 0e-10, "lambda is not right"
+    assert_in_delta 30.3, e.lambda, 1e-10, "lambda is not right"
   end
 end

@@ -44,11 +44,11 @@ class TestUniformDistribution < MiniTest::Unit::TestCase
 
   def test_exclude_value_for_non_inverted_distributions
     u = uniform
-    assert_in_delta 0.3, u.exclude_value.(0.3), 0e-10, "exclude value function is not the identity"
+    assert_in_delta 0.3, u.exclude_value.(0.3), 1e-10, "exclude value function is not the identity"
   end
 
   def test_exclude_value_for_inverted_distributions
     u = uniform included: 7, excluded: 5
-    assert_in_delta 0.7, u.exclude_value.(0.3), 0e-10, "exclude value function is not 1-n"
+    assert_in_delta 0.7, u.exclude_value.(0.3), 1e-10, "exclude value function is not 1-n"
   end
 end

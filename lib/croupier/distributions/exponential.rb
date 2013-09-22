@@ -22,7 +22,7 @@ module Croupier
       })
 
       inv_cdf do |n|
-        (-1 / lambda) * Math.log(n)
+        (-1 / lambda) * Math.log(1 - n)
       end
 
       def initialize(options={})

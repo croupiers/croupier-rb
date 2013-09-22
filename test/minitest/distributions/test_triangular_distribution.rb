@@ -15,12 +15,12 @@ class TestTriangularDistribution < MiniTest::Unit::TestCase
 
   def test_change_mode_if_lt_lower_value
     t = triangular lower: 3, upper: 6, mode: 2
-    assert_in_delta 4.5, t.mode, 0e-10, "mode did not change to median"
+    assert_in_delta 4.5, t.mode, 1e-10, "mode did not change to median"
   end
 
   def test_change_mode_if_gt_upper_value
     t = triangular lower: 3, upper: 6, mode: 8
-    assert_in_delta 4.5, t.mode, 0e-10, "mode did not change to median"
+    assert_in_delta 4.5, t.mode, 1e-10, "mode did not change to median"
   end
 end
 
