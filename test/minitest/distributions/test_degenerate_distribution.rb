@@ -18,6 +18,6 @@ class TestDegenerateDistribution < MiniTest::Unit::TestCase
   def test_to_enum
     enum = Croupier::Distributions::Degenerate.new(constant: 5).to_enum
     assert_kind_of Enumerator, enum
-    assert_equal [5,5,5], enum.take(3)
+    assert_equal [5,5,5], enum.take(3).to_a
   end
 end
