@@ -1,7 +1,7 @@
 require "minitest/autorun"
 require "croupier"
 
-class TestWithEnumeratorGenerator < MiniTest::Unit::TestCase
+class TestEnumeratorBlockGenerator < MiniTest::Unit::TestCase
 
   def setup
     @klazz = Class.new(::Croupier::Distribution) do
@@ -11,7 +11,7 @@ class TestWithEnumeratorGenerator < MiniTest::Unit::TestCase
     end
     @distribution = @klazz.new
     @block = ->(y) { y << my_num while true }
-    @gen = ::Croupier::DistributionGenerators::WithEnumeratorGenerator.new @distribution, &@block
+    @gen = ::Croupier::DistributionGenerators::EnumeratorBlockGenerator.new @distribution, &@block
   end
 
   def test_initialize_calls_super_and_it_works

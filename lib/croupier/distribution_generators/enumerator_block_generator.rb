@@ -2,12 +2,12 @@ module Croupier
 
   module DistributionGenerators
 
-    # Call `with_enumerator` with a block
+    # Call `enumerator_block` with a block
     # that will be called as the parameter for
     # Enumerator.new
-    class WithEnumeratorGenerator < ::Croupier::DistributionGenerator
+    class EnumeratorBlockGenerator < ::Croupier::DistributionGenerator
 
-      method_name "with_enumerator"
+      method_name "enumerator_block"
 
       def initilize distribution, &block
         super distribution, &block

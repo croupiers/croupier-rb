@@ -104,7 +104,8 @@ class TestDistributionClassClassMethods < MiniTest::Unit::TestCase
   def test_responds_to_generators_methods
     assert_respond_to ::Croupier::Distribution, 'inv_cdf'
     assert_respond_to ::Croupier::Distribution, 'minimum_sample'
-    assert_respond_to ::Croupier::Distribution, 'with_enumerator'
+    assert_respond_to ::Croupier::Distribution, 'enumerator_block'
+    assert_respond_to ::Croupier::Distribution, 'enumerator'
   end
 
   def test_generator_class_setter_adds_generator_class
