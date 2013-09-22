@@ -20,18 +20,17 @@ module Croupier
         banner: "Bernoulli distribution. Discrete probability distribution taking value 1 with success probability p and value 0 with failure probability 1-p."
       })
 
+      enumerator do |c|
+        c.binomial(success: success, size: 1)
+      end
+
       def initialize(options={})
         super(options)
         raise Croupier::InputParamsError, "Probability of success must be in the interval [0,1]" if params[:success] > 1 || params[:success] < 0
       end
 
-      def generate_number
-        binomial_1_p.generate_number
-      end
-
-      private
-      def binomial_1_p
-        @binomial_1_p ||= ::Croupier::Distributions::Binomial.new(:success => params[:success], :size => 1)
+      def success
+        params[:success]
       end
     end
   end
