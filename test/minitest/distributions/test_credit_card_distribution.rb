@@ -16,6 +16,11 @@ class TestDistributionClass < MiniTest::Unit::TestCase
     assert_respond_to dist, 'description'
   end
 
+  def test_init_method
+    c = Croupier::Distributions::CreditCard.new visa: true, initial_values: "5678"
+    assert_equal "45678", c.init
+  end
+
   def test_visa_starts_with_4
     assert_equal "4",  credit_card(visa: true)[0]
   end

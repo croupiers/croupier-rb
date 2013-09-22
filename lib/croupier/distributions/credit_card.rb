@@ -24,8 +24,29 @@ module Croupier
         banner: "Credit Card distribution. Generate random card numbers"
       })
 
+      # Returns a lambda that completes
+      # the credit card number up to
+      # 15 numbers.
+      def fill_number
+        ->(n) { "#{n}#{generate_random_string(15-n.size)}"[0..14] }
+      end
+
+      # Returns a lambda that adds
+      # the checksum number
+      def add_checksum
+        ->(n) { "#{n}#{check_digit_for(n)}" }
+      end
+
+      enumerator do |c|
+        c.degenerate(constant: init).map(&fill_number).map(&add_checksum)
+      end
+
       def initialize(options={})
         super(options)
+      end
+
+      def init
+        "#{initial_value_by_card_type}#{initial_values}"
       end
 
       def generate_number
