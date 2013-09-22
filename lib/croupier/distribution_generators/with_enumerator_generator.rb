@@ -16,7 +16,7 @@ module Croupier
       def to_enum
         Enumerator.new do |y|
           self.distribution.instance_exec(y,&self.block)
-        end
+        end.lazy
       end
     end
   end

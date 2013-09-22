@@ -17,7 +17,7 @@ module Croupier
               y << a
             end
           end
-        end
+        end.lazy
       end
     end
   end
