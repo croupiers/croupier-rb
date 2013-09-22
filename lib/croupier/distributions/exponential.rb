@@ -21,13 +21,17 @@ module Croupier
         banner: "Exponential distribution. Generate numbers following a exponential distribution for a given lambda rate"
       })
 
-      def initialize(options={})
-        super(options)
-        raise Croupier::InputParamsError, "Invalid interval values" if params[:lambda] <= 0
+      inv_cdf do |n|
+        (-1 / lambda) * Math.log(n)
       end
 
-      def inv_cdf n
-        (-1/params[:lambda]) * Math.log(n)
+      def initialize(options={})
+        super(options)
+        raise Croupier::InputParamsError, "lambda cannot be negative" if params[:lambda] <= 0
+      end
+
+      def lambda
+        params[:lambda]
       end
     end
   end
