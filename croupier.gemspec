@@ -13,7 +13,8 @@ Gem::Specification.new do |s|
   s.authors = ['Juanjo Bazán', 'Sergio Arbeo']
   s.email = ["jjbazan@gmail.com"]
   s.homepage = 'https://github.com/xuanxu/croupier'
-
+  s.license = 'MIT'
+  
   s.has_rdoc = true
   s.rdoc_options = ['--main', 'README.rdoc', '--charset=UTF-8']
 
