@@ -134,8 +134,19 @@ module Croupier
       @parameters
     end
 
+    # Make Croupier::Distribution an Enumerable
+    include Enumerable
+
+    def each &block
+      if block_given?
+        self.to_enum.each &block
+      else
+        self.to_enum.each
+      end
+    end
+
     def to_enum
-      @enum ||= @generator.to_enum
+      @enum ||= @generator.to_enum.lazy
     end
 
     protected
