@@ -25,8 +25,8 @@ module Croupier
       })
 
       enumerator do |c|
-        c.geometric(sucess: success).to_enum.each_slice(size).map do |sample|
-          sample.inject(-size, &:+)
+        c.geometric(success: success).to_enum.lazy.each_slice(size).map do |x|
+          x.inject(-size,&:+)
         end
       end
 
@@ -36,7 +36,7 @@ module Croupier
       end
 
       def success
-        params[:succes]
+        params[:success]
       end
 
       def size

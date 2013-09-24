@@ -27,7 +27,7 @@ module Croupier
       enumerator_block do |y|
         l = Math.exp(-lambda)
         loop do
-          k = 0, p = 1;
+          k = 0; p = 1
           while p > l
             p *= ::Croupier.rand
             k += 1

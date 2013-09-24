@@ -38,7 +38,7 @@ module Croupier
       end
 
       enumerator do |c|
-        c.degenerate(constant: init).map(&fill_number).map(&add_checksum)
+        c.degenerate(constant: init).to_enum.lazy.map(&fill_number).map(&add_checksum)
       end
 
       def initialize(options={})

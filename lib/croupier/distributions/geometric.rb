@@ -28,7 +28,7 @@ module Croupier
       # Fair point: it is not the inverse of the cdf,
       # but it generates the distribution from an uniform.
       inv_cdf do |n|
-        (Math.log(1-n) / Math.log(1-success)).ceil
+        (Math.log(1.0-n) / Math.log(1.0-success)).ceil
       end
 
       def initialize(options={})

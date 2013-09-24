@@ -22,7 +22,7 @@ module Croupier
       })
 
       enumerator do |c|
-        c.degenerate(constant: scale).zip(xi_enum, adjust_enum).map do |s,x,a|
+        c.degenerate(constant: scale).to_enum.lazy.zip(xi_enum, adjust_enum).map do |s,x,a|
           s * (x - a)
         end
       end
@@ -63,7 +63,7 @@ module Croupier
         uniform.zip(uniform, uniform).map do |v1, v2, v3|
           x = xi v1, v2, v3
           [x, eta(x, v1, v2, v3)]
-        end.select do |x,e|
+        end.reject do |x,e|
           e > (x** (delta - 1)) * (Math.exp(-x))
         end.map do |x,e|
           x

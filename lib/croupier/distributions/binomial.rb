@@ -23,14 +23,14 @@ module Croupier
       })
 
       enumerator_block do |y|
-        g = c.geometric(success: success).to_enum
+        g = ::Croupier::Distributions.geometric(success: success).to_enum.lazy
         loop do
           x = -1; s = 0
 
           begin
             s += g.next
             x += 1
-          end while s > size
+          end while s <= size
 
           y << x
         end

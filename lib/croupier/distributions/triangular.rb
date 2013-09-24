@@ -40,7 +40,7 @@ module Croupier
           warn("Mode is not in the support. Mode value will be change to median.")
           params[:mode] = (params[:lower]+params[:upper])/2.0;
         end
-        @F_c = (params[:mode]-params[:lower]).to_f/(params[:mode]-params[:lower])
+        @F_c = (params[:mode]-params[:lower]).to_f/(params[:upper]-params[:lower])
       end
 
       def lower

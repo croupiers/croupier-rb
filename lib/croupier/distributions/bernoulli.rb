@@ -21,7 +21,7 @@ module Croupier
       })
 
       enumerator do |c|
-        c.binomial(success: success, size: 1)
+        c.binomial(success: success, size: 1).to_enum.lazy
       end
 
       def initialize(options={})
