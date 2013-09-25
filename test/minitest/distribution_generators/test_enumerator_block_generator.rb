@@ -1,7 +1,7 @@
 require "minitest/autorun"
 require "croupier"
 
-class TestEnumeratorBlockGenerator < MiniTest::Unit::TestCase
+class TestEnumeratorBlockGenerator < Minitest::Test
 
   def setup
     @klazz = Class.new(::Croupier::Distribution) do

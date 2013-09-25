@@ -1,6 +1,6 @@
 require "minitest/autorun"
 require "croupier"
-class TestCroupierModule < MiniTest::Unit::TestCase
+class TestCroupierModule < Minitest::Test
 
   def test_module_manages_a_croupier_cli_application_object
     app = Croupier.application

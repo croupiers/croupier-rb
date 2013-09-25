@@ -1,6 +1,6 @@
 require "minitest/autorun"
 require "croupier"
-class TestGeometricDistribution < MiniTest::Unit::TestCase
+class TestGeometricDistribution < Minitest::Test
 
   def geometric *args
     ::Croupier::Distributions.geometric *args

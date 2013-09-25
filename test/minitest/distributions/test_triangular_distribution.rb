@@ -1,6 +1,6 @@
 require "minitest/autorun"
 require "croupier"
-class TestTriangularDistribution < MiniTest::Unit::TestCase
+class TestTriangularDistribution < Minitest::Test
 
   def triangular(opts={})
     ::Croupier::Distributions.triangular(opts)

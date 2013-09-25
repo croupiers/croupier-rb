@@ -1,7 +1,7 @@
 require "minitest/autorun"
 require "croupier"
 
-class DistributionGeneratorClassIntanceMethods < MiniTest::Unit::TestCase
+class DistributionGeneratorClassIntanceMethods < Minitest::Test
 
   def setup
     @distribution = Croupier::Distribution.new

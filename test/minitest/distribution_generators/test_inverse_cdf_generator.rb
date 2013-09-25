@@ -1,6 +1,6 @@
 require "minitest/autorun"
 require "croupier"
-class TestInverseCdfGenerator < MiniTest::Unit::TestCase
+class TestInverseCdfGenerator < Minitest::Test
 
   def setup
     @distribution = ::Croupier::Distribution.new

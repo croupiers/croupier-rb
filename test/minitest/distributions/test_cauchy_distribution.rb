@@ -1,6 +1,6 @@
 require "minitest/autorun"
 require "croupier"
-class TestCauchyDistribution < MiniTest::Unit::TestCase
+class TestCauchyDistribution < Minitest::Test
 
   def cauchy *args
     ::Croupier::Distributions.cauchy *args

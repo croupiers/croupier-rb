@@ -1,6 +1,6 @@
 require "minitest/autorun"
 require "croupier"
-class TestExponentialDistribution < MiniTest::Unit::TestCase
+class TestExponentialDistribution < Minitest::Test
 
   def exponential *args
     ::Croupier::Distributions.exponential *args

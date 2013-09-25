@@ -1,7 +1,7 @@
-require 'minitest/autorun'
-require 'croupier'
+require "minitest/autorun"
+require "croupier"
 
-class TestDistributionClassClassMethods < MiniTest::Unit::TestCase
+class TestDistributionClassClassMethods < Minitest::Test
 
   def distribution_subclass_with_name name
     Class.new Croupier::Distribution do

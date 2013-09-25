@@ -1,6 +1,6 @@
 require "minitest/autorun"
 require "croupier"
-class TestBinomialDistribution < MiniTest::Unit::TestCase
+class TestBinomialDistribution < Minitest::Test
 
   def binomial *args
     ::Croupier::Distributions.binomial *args

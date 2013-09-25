@@ -1,6 +1,6 @@
 require "minitest/autorun"
 require "croupier"
-class TestMinimumSampleGenerator < MiniTest::Unit::TestCase
+class TestMinimumSampleGenerator < Minitest::Test
 
   def setup
     @distribution = ::Croupier::Distribution.new
