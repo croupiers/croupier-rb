@@ -19,7 +19,7 @@ module Croupier
       cli_banner "Family of continuous distributions with two parameters, shape and scale."
 
       enumerator do |c|
-        c.degenerate(constant: scale).to_enum.lazy.zip(xi_enum, adjust_enum).map do |s,x,a|
+        c.degenerate(constant: scale).zip(xi_enum, adjust_enum).map do |s,x,a|
           s * (x - a)
         end
       end

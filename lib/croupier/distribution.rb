@@ -154,13 +154,19 @@ module Croupier
     end
 
     # Make Croupier::Distribution an Enumerable
-    include Enumerable
+    # Read the tests for the instance methods.
+    # Then, cry.
+    Enumerable.instance_methods.each do |method|
+      self.send(:define_method, method) do |*args, &block|
+        self.to_enum.send(method, *args, &block)
+      end
+    end
 
     def each &block
       if block_given?
-        self.to_enum.each &block
+        to_enum.each &block
       else
-        self.to_enum.each
+        to_enum.each
       end
     end
 

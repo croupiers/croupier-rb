@@ -21,7 +21,7 @@ module Croupier
       cli_banner "Negative binomial distribution. Discrete probability distribution of the number of successes in a sequence of Bernoulli trials before a specified (non-random) number of failures (denoted size) occur."
 
       enumerator do |c|
-        c.geometric(success: success).to_enum.lazy.each_slice(size).map do |x|
+        c.geometric(success: success).each_slice(size).map do |x|
           x.inject(-size,&:+)
         end
       end

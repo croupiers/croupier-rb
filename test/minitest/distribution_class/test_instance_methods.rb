@@ -54,7 +54,21 @@ class TestDistributionClassInstanceMethods < Minitest::Test
     assert_kind_of ::Croupier::DistributionGenerators::InverseCDFGenerator, d.generator
   end
 
+  # What The Fuck
+  # Making ::Croupier::Distribution a subclass of Enumerator::Lazy
+  # is a fucking hell. Impossible, as far as I am concerned.
+  # Yes, I can say fucking since trying to do so made MRI to break
+  # and cry like Captain Hammer at the end of Dr. Horrible.
+  # If Enumerable gets just included, we lose the lazy part.
+  #
+  # My solution, bang my head against the train window and then
+  # delegate all the methods to the enum.
   def test_distribution_is_enumerable
-    assert_kind_of Enumerable, ::Croupier::Distribution.new
+    dist = ::Croupier::Distribution.new
+
+    assert_respond_to dist, :each, "distribution does not respond to each"
+    Enumerable.instance_methods.each do |method|
+      assert_respond_to dist, method, "distribution does not respond to #{method}"
+    end
   end
 end
