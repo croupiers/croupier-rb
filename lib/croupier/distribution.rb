@@ -66,6 +66,15 @@ module Croupier
         @cli_options || {}
       end
 
+      # Sets the value for the :banner key in cli_options
+      #
+      # @param banner [String] new cli banner
+      # return [String] current cli banner
+      def cli_banner banner
+        @cli_options = cli_options
+        @cli_options[:banner] = banner
+      end
+
       # Sets the cli_name if given
       #
       # @param cli_name [String] new cli name

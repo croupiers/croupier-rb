@@ -33,6 +33,12 @@ class TestDistributionClassClassMethods < Minitest::Test
     end
   end
 
+  def distribution_subclass_with_cli_banner banner
+    Class.new Croupier::Distribution do
+      cli_banner banner
+    end
+  end
+
   def distribution_subclass_with_cli_name name
     Class.new Croupier::Distribution do
       cli_name name
@@ -76,6 +82,19 @@ class TestDistributionClassClassMethods < Minitest::Test
     assert_equal "a", a.cli_name
     assert_equal "b", b.cli_name
     assert_nil Croupier::Distribution.cli_name
+  end
+
+  def test_cli_banner_setter_adds_the_cli_banner
+    a = distribution_subclass_with_cli_banner "Instructions for use of this Distribution"
+    assert_equal "Instructions for use of this Distribution", a.cli_options[:banner]
+  end
+
+  def test_cli_banner_sets_separated_banners_for_each_subclass
+    a = distribution_subclass_with_cli_banner "a"
+    b = distribution_subclass_with_cli_banner "b"
+    assert_equal "a", a.cli_options[:banner]
+    assert_equal "b", b.cli_options[:banner]
+    assert_nil Croupier::Distribution.cli_options[:banner]
   end
 
   def test_cli_options_setter_adds_the_options
