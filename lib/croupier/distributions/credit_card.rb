@@ -19,7 +19,7 @@ module Croupier
           [:american_express, 'american express card type', {type: :boolean, default: false}],
           [:visa, 'visa card type', {type: :boolean, default: false}],
           [:discover, 'discover card type', {type: :boolean, default: false}],
-          [:initial_values, 'initial values for the credit card. They will be place after card type if one is given.', {type: :string, default: ""}]
+          [:initial_values, 'initial values for the credit card. They will be placed after card type if one is given.', {type: :string, default: ""}]
         ],
         banner: "Credit Card distribution. Generate random card numbers"
       })
