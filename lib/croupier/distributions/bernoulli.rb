@@ -13,12 +13,10 @@ module Croupier
 
       cli_name "bernoulli"
 
-      cli_options({
-        options: [
-          [:success, 'success probability', {type: :float, short: "-p", default: 0.5}]
-        ],
-        banner: "Bernoulli distribution. Discrete probability distribution taking value 1 with success probability p and value 0 with failure probability 1-p."
-      })
+      cli_option :success, 'success probability', {type: :float, short: "-p", default: 0.5}
+
+      cli_banner "Bernoulli distribution. Discrete probability distribution taking value 1 with success probability p and value 0 with failure probability 1-p."
+
 
       enumerator do |c|
         c.binomial(success: success, size: 1).to_enum.lazy

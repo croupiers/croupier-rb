@@ -13,14 +13,11 @@ module Croupier
 
       cli_name "triangular"
 
-      cli_options({
-        options: [
-          [:lower, 'lower limit', {type: :float, short: '-a', default: 0.0}],
-          [:upper, 'upper limit', {type: :float, short: '-b', default: 1.0}],
-          [:mode, 'mode', {type: :float, short: '-c', default: 0.5}]
-        ],
-        banner: "Triangular distribution. Continuous distribution whose support is the interval (a,b), with mode c."
-      })
+      cli_option :lower, 'lower limit', {type: :float, short: '-a', default: 0.0}
+      cli_option :upper, 'upper limit', {type: :float, short: '-b', default: 1.0}
+      cli_option :mode, 'mode', {type: :float, short: '-c', default: 0.5}
+
+      cli_banner "Triangular distribution. Continuous distribution whose support is the interval (a,b), with mode c."
 
       inv_cdf do |n|
         if n < @F_c

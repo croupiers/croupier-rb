@@ -13,13 +13,10 @@ module Croupier
 
       cli_name "cauchy"
 
-      cli_options({
-        options: [
-          [:location, 'location param', {type: :float, default:0.0}],
-          [:scale, 'scale param', {type: :float, default: 1.0}],
-        ],
-        banner: "Cauchy continuous distribution. Generate numbers following a Cauchy distribution with location and scale parameters"
-      })
+      cli_option :location, 'location param', {type: :float, default:0.0}
+      cli_option :scale, 'scale param', {type: :float, default: 1.0}
+
+      cli_banner "Cauchy continuous distribution. Generate numbers following a Cauchy distribution with location and scale parameters"
 
       inv_cdf do |n|
         location + (scale * Math.tan( Math::PI * (0.5 - n)))

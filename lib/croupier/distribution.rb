@@ -66,7 +66,7 @@ module Croupier
         @cli_options ||= {}
       end
 
-      # Adds an option to the :options Array in cli_options
+      # Adds an option to the :options Array in cli_options hash.
       #
       # @param option [Symbol] new cli option
       # @param description [String] description of the cli option
@@ -77,7 +77,7 @@ module Croupier
         cli_options[:options] << [option, description, params]
       end
 
-      # Sets the value for the :banner key in cli_options
+      # Sets the value for the :banner key in cli_options hash.
       #
       # @param banner [String] new cli banner
       # return [String] current cli banner
@@ -85,7 +85,7 @@ module Croupier
         cli_options[:banner] = banner
       end
 
-      # Sets the cli_name if given
+      # Sets the cli_name if given.
       #
       # @param cli_name [String] new cli name
       # @return [String] current cli name

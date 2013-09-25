@@ -13,16 +13,13 @@ module Croupier
 
       cli_name "credit_card"
 
-      cli_options({
-        options: [
-          [:master_card, 'master card type', {type: :boolean, default: false}],
-          [:american_express, 'american express card type', {type: :boolean, default: false}],
-          [:visa, 'visa card type', {type: :boolean, default: false}],
-          [:discover, 'discover card type', {type: :boolean, default: false}],
-          [:initial_values, 'initial values for the credit card. They will be placed after card type if one is given.', {type: :string, default: ""}]
-        ],
-        banner: "Credit Card distribution. Generate random card numbers"
-      })
+      cli_option :master_card, 'master card type', {type: :boolean, default: false}
+      cli_option :american_express, 'american express card type', {type: :boolean, default: false}
+      cli_option :visa, 'visa card type', {type: :boolean, default: false}
+      cli_option :discover, 'discover card type', {type: :boolean, default: false}
+      cli_option :initial_values, 'initial values for the credit card. They will be placed after card type if one is given.', {type: :string, default: ""}
+
+      cli_banner "Credit Card distribution. Generate random card numbers"
 
       # Returns a lambda that completes
       # the credit card number up to

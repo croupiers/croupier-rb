@@ -13,13 +13,10 @@ module Croupier
 
       cli_name "gamma"
 
-      cli_options({
-        options: [
-          [:shape, 'shape of the distribution', {type: :float, default: 1.0}],
-          [:scale, 'scale of the distribution', {type: :float, default: 1.0}]
-        ],
-        banner: "Family of continuous distributions with two parameters, shape and scale."
-      })
+      cli_option :shape, 'shape of the distribution', {type: :float, default: 1.0}
+      cli_option :scale, 'scale of the distribution', {type: :float, default: 1.0}
+
+      cli_banner "Family of continuous distributions with two parameters, shape and scale."
 
       enumerator do |c|
         c.degenerate(constant: scale).to_enum.lazy.zip(xi_enum, adjust_enum).map do |s,x,a|

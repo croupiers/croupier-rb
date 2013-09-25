@@ -17,12 +17,9 @@ module Croupier
 
       cli_name "poisson"
 
-      cli_options({
-        options: [
-          [:lambda, 'rate parameter (equal to the mean of the distribution)', {type: :integer, default: 50}]
-        ],
-        banner: "Poisson distribution. Discrete probability distribution that expresses the probability of a given number of events occurring in a fixed interval of time."
-      })
+      cli_option :lambda, 'rate parameter (equal to the mean of the distribution)', {type: :integer, default: 50}
+
+      cli_banner "Poisson distribution. Discrete probability distribution that expresses the probability of a given number of events occurring in a fixed interval of time."
 
       enumerator_block do |y|
         l = Math.exp(-lambda)

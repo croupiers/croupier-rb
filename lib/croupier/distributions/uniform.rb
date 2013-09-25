@@ -14,13 +14,10 @@ module Croupier
 
       cli_name "uniform"
 
-      cli_options({
-        options: [
-          [:included, 'interval included value', {type: :float, short: "-i", default: 0.0}],
-          [:excluded, 'interval excluded value', {type: :float, short: "-e", default: 1.0}]
-        ],
-        banner: "Uniform distribution. Generate numbers following a continuous distribution on [a,b] (given a=min(included, excluded) and b=max(included,excluded))  where all points in the interval are equally likely."
-      })
+      cli_option :included, 'interval included value', {type: :float, short: "-i", default: 0.0}
+      cli_option :excluded, 'interval excluded value', {type: :float, short: "-e", default: 1.0}
+
+      cli_banner "Uniform distribution. Generate numbers following a continuous distribution on [a,b] (given a=min(included, excluded) and b=max(included,excluded))  where all points in the interval are equally likely."
 
       def initialize(options={})
         super options
