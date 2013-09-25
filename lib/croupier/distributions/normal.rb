@@ -42,6 +42,7 @@ module Croupier
         params[:mean]
       end
 
+      # FIXME: Create some sort of adjustment for these kinds of things.
       def to_enum
         @generator.to_enum.
           map {|x| x * std}.  # Adjust standard deviation
