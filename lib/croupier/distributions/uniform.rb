@@ -22,6 +22,12 @@ module Croupier
         banner: "Uniform distribution. Generate numbers following a continuous distribution on [a,b] (given a=min(included, excluded) and b=max(included,excluded))  where all points in the interval are equally likely."
       })
 
+      enumerator do |c|
+        base_enum.map(&exclude_value).map do |n|
+          min + range * n
+        end
+      end
+
       def initialize(options={})
         super options
         @exclude_value = if self.inverted?
@@ -43,21 +49,13 @@ module Croupier
         params[:included] > params[:excluded]
       end
 
-      def to_enum
-        @enum ||= base_enum.lazy.
-            map(&exclude_value).
-            map do |n|
-              min + range * n
-            end
-      end
-
       protected
       def base_enum
         Enumerator.new do |y|
           loop do
             y << Croupier.rand
           end
-        end
+        end.lazy
       end
     end
   end
