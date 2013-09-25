@@ -1,6 +1,6 @@
 require "minitest/autorun"
 require "croupier"
-class TestPoissonDistribution < MiniTest::Unit::TestCase
+class TestPoissonDistribution < Minitest::Test
 
   def poisson *args
     ::Croupier::Distributions.poisson *args

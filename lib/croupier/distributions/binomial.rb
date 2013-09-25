@@ -14,13 +14,11 @@ module Croupier
 
       cli_name "binomial"
 
-      cli_options({
-        options: [
-          [:size, 'number of trials', {type: :integer, default: 1}],
-          [:success, 'success probability of each trial', {type: :float, short: "-p", default: 0.5}]
-        ],
-        banner: "Binomial distribution. Discrete probability distribution of the number of successes in a sequence of Bernoulli trials."
-      })
+      cli_option :size, 'number of trials', {type: :integer, default: 1}
+      cli_option :success, 'success probability of each trial', {type: :float, short: "-p", default: 0.5}
+
+      cli_banner "Binomial distribution. Discrete probability distribution of the number of successes in a sequence of Bernoulli trials."
+
 
       enumerator_block do |y|
         g = ::Croupier::Distributions.geometric(success: success).to_enum.lazy

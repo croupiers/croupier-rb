@@ -1,6 +1,6 @@
 require "minitest/autorun"
 require "croupier"
-class TestNormalDistribution < MiniTest::Unit::TestCase
+class TestNormalDistribution < Minitest::Test
   def normal *args
     ::Croupier::Distributions.normal *args
   end

@@ -14,12 +14,9 @@ module Croupier
 
       cli_name "exponential"
 
-      cli_options({
-        options: [
-          [:lambda, 'rate param', {type: :float, default: 1.0}]
-        ],
-        banner: "Exponential distribution. Generate numbers following a exponential distribution for a given lambda rate"
-      })
+      cli_option :lambda, 'rate param', {type: :float, default: 1.0}
+
+      cli_banner "Exponential distribution. Generate numbers following a exponential distribution for a given lambda rate"
 
       inv_cdf do |n|
         (-1 / lambda) * Math.log(1 - n)

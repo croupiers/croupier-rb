@@ -1,7 +1,7 @@
 require "minitest/autorun"
 require "croupier"
 
-class DistributionGeneratorClassClassMethods < MiniTest::Unit::TestCase
+class DistributionGeneratorClassClassMethods < Minitest::Test
 
   def create_generator_with_method_name name
     Class.new Croupier::DistributionGenerator do

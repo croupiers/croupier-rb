@@ -1,7 +1,7 @@
-require 'minitest/autorun'
-require 'croupier'
+require "minitest/autorun"
+require "croupier"
 
-class TestDistributionClassClassMethods < MiniTest::Unit::TestCase
+class TestDistributionClassClassMethods < Minitest::Test
 
   def distribution_subclass_with_name name
     Class.new Croupier::Distribution do
@@ -30,6 +30,12 @@ class TestDistributionClassClassMethods < MiniTest::Unit::TestCase
   def distribution_subclass_with_cli_options opts
     Class.new Croupier::Distribution do
       cli_options opts
+    end
+  end
+
+  def distribution_subclass_with_cli_banner banner
+    Class.new Croupier::Distribution do
+      cli_banner banner
     end
   end
 
@@ -76,6 +82,46 @@ class TestDistributionClassClassMethods < MiniTest::Unit::TestCase
     assert_equal "a", a.cli_name
     assert_equal "b", b.cli_name
     assert_nil Croupier::Distribution.cli_name
+  end
+
+  def test_cli_banner_setter_adds_the_cli_banner
+    a = distribution_subclass_with_cli_banner "Instructions for use of this Distribution"
+    assert_equal "Instructions for use of this Distribution", a.cli_options[:banner]
+  end
+
+  def test_cli_banner_sets_separated_banners_for_each_subclass
+    a = distribution_subclass_with_cli_banner "a"
+    b = distribution_subclass_with_cli_banner "b"
+    assert_equal "a", a.cli_options[:banner]
+    assert_equal "b", b.cli_options[:banner]
+    assert_nil Croupier::Distribution.cli_options[:banner]
+  end
+
+  def test_cli_option_setter_adds_a_cli_option
+    option = [:abc, "prints ABC", {}]
+    a = distribution_subclass_with_name "Test"
+    a.cli_option option[0], option[1], option[2]
+    assert_equal [option], a.cli_options[:options]
+  end
+
+  def test_cli_option_does_not_delete_previous_cli_options
+    opts = {banner: 'Hey', options: [[:a, "A", {type: :boolean}], [:b, "B", {type: :float}]]}
+    option  = [:abc, "prints ABC", {}]
+    a = distribution_subclass_with_cli_options opts
+    a.cli_option option[0], option[1], option[2]
+    assert_equal (opts[:options] << option), a.cli_options[:options]
+  end
+
+  def test_cli_option_adds_separated_option_for_each_subclass
+    optionA = [:abc, "prints ABC", {}]
+    optionB = [:xyz, "prints XYZ", {type: :boolean}]
+    a = distribution_subclass_with_name "A"
+    b = distribution_subclass_with_name "B"
+    a.cli_option optionA[0], optionA[1], optionA[2]
+    b.cli_option optionB[0], optionB[1], optionB[2]
+    assert_equal [optionA], a.cli_options[:options]
+    assert_equal [optionB], b.cli_options[:options]
+    assert_empty Croupier::Distribution.cli_options
   end
 
   def test_cli_options_setter_adds_the_options

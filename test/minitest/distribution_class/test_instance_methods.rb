@@ -1,6 +1,6 @@
 require "minitest/autorun"
 require "croupier"
-class TestDistributionClassInstanceMethods < MiniTest::Unit::TestCase
+class TestDistributionClassInstanceMethods < Minitest::Test
 
   def test_distribution_has_name_and_description
     dist = Croupier::Distribution.new
@@ -52,5 +52,9 @@ class TestDistributionClassInstanceMethods < MiniTest::Unit::TestCase
 
     d = c.new
     assert_kind_of ::Croupier::DistributionGenerators::InverseCDFGenerator, d.generator
+  end
+
+  def test_distribution_is_enumerable
+    assert_kind_of Enumerable, ::Croupier::Distribution.new
   end
 end

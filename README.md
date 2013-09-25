@@ -40,6 +40,7 @@ Current version implements the following distributions:
 * Bernoulli
 * Binomial
 * Cauchy
+* Credit Card
 * Degenerate
 * Exponential
 * Gamma

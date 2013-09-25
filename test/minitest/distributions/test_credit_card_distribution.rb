@@ -1,6 +1,6 @@
 require "minitest/autorun"
 require "croupier"
-class TestDistributionClass < MiniTest::Unit::TestCase
+class TestDistributionClass < Minitest::Test
 
   def valid_options(optional={})
     {}.merge(optional)

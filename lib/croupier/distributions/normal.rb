@@ -14,13 +14,10 @@ module Croupier
 
       cli_name "normal"
 
-      cli_options({
-        options: [
-          [:mean, 'mean of the distribution', {type: :float, default: 0.0}],
-          [:std, 'standard deviation of the distribution', {type: :float, default: 1.0}]
-        ],
-        banner: "Normal distribution. Generate numbers following a continuous distribution in the real line with mean :mean and standard deviation :std."
-      })
+      cli_option :mean, 'mean of the distribution', {type: :float, default: 0.0}
+      cli_option :std, 'standard deviation of the distribution', {type: :float, default: 1.0}
+
+      cli_banner "Normal distribution. Generate numbers following a continuous distribution in the real line with mean :mean and standard deviation :std."
 
       minimum_sample do
         x, y = 1 - ::Croupier.rand, 1 - ::Croupier.rand

@@ -1,6 +1,6 @@
 require "minitest/autorun"
 require "croupier"
-class TestGammaDistribution < MiniTest::Unit::TestCase
+class TestGammaDistribution < Minitest::Test
 
   def gamma *args
     ::Croupier::Distributions.gamma *args

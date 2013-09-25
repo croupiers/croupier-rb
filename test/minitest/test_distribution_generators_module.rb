@@ -1,7 +1,7 @@
 require "minitest/autorun"
 require "croupier"
 
-class TestDistributionGeneratorsModule < MiniTest::Unit::TestCase
+class TestDistributionGeneratorsModule < Minitest::Test
 
   def test_list_of_all_distribution_generators
     all = Croupier::DistributionGenerators.all
@@ -27,7 +27,7 @@ class TestDistributionGeneratorsModule < MiniTest::Unit::TestCase
       assert_includes list, d.method_name, "#{d.method_name} not included in list"
     }
   end
-  
+
   def test_all_and_list_have_same_size
     all = Croupier::DistributionGenerators.all
     list = Croupier::DistributionGenerators.list

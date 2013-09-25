@@ -1,6 +1,6 @@
 require "minitest/autorun"
 require "croupier"
-class TestUniformDistribution < MiniTest::Unit::TestCase
+class TestUniformDistribution < Minitest::Test
 
   def uniform(opts={})
     ::Croupier::Distributions.uniform(opts)

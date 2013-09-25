@@ -18,12 +18,9 @@ module Croupier
 
       cli_name "geometric"
 
-      cli_options({
-        options: [
-          [:success, 'success probability of each trial', {type: :float, short: "-p", default: 0.5}]
-        ],
-        banner: "Geometric distribution. Discrete probability distribution that expresses the number of X Bernoulli trials needed to get one success, supported on the set { 1, 2, 3, ...} }"
-      })
+      cli_option :success, 'success probability of each trial', {type: :float, short: "-p", default: 0.5}
+
+      cli_banner "Geometric distribution. Discrete probability distribution that expresses the number of X Bernoulli trials needed to get one success, supported on the set { 1, 2, 3, ...} }"
 
       # Fair point: it is not the inverse of the cdf,
       # but it generates the distribution from an uniform.
