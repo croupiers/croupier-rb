@@ -184,6 +184,10 @@ module Croupier
       end
     end
 
+    def take n
+      to_enum.take(n).to_a
+    end
+
     def to_enum
       @enum ||= @generator.to_enum.lazy
     end
