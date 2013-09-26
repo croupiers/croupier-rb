@@ -26,10 +26,6 @@ module Croupier
         super(options)
         raise Croupier::InputParamsError, "lambda cannot be negative" if params[:lambda] <= 0
       end
-
-      def lambda
-        params[:lambda]
-      end
     end
   end
 end

@@ -26,14 +26,6 @@ module Croupier
         super(options)
         raise Croupier::InputParamsError, "Invalid scale value, it must be positive" unless params[:scale] > 0
       end
-
-      def location
-        params[:location]
-      end
-
-      def scale
-        params[:scale]
-      end
     end
   end
 end

@@ -31,14 +31,6 @@ module Croupier
         super(options)
       end
 
-      def std
-        params[:std]
-      end
-
-      def mean
-        params[:mean]
-      end
-
       # FIXME: Create some sort of adjustment for these kinds of things.
       def to_enum
         @generator.to_enum.

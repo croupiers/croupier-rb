@@ -18,7 +18,7 @@ module Croupier
 
       enumerator_block do |y|
         loop do
-          y << params[:constant]
+          y << constant
         end
       end
 

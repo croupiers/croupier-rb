@@ -40,18 +40,6 @@ module Croupier
         @F_c = (params[:mode]-params[:lower]).to_f/(params[:upper]-params[:lower])
       end
 
-      def lower
-        params[:lower]
-      end
-
-      def upper
-        params[:upper]
-      end
-
-      def mode
-        params[:mode]
-      end
-
       def range
         @range ||= upper - lower
       end

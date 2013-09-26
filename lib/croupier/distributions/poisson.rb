@@ -36,10 +36,6 @@ module Croupier
       def initialize(options={})
         super(options)
       end
-
-      def lambda
-        params[:lambda]
-      end
     end
   end
 end

@@ -28,14 +28,6 @@ module Croupier
         super(options)
       end
 
-      def shape
-        params[:shape]
-      end
-
-      def scale
-        params[:scale]
-      end
-
       def delta
         @delta ||= shape - shape.floor
       end

@@ -62,7 +62,12 @@ module Croupier
       # @param options [Hash] new cli options
       # return [Hash] current cli options
       def cli_options options=nil
-        @cli_options = options if options
+        if options
+          cli_banner options[:banner] if options[:banner]
+          (options[:options] || []).each do |opt|
+            cli_option *opt
+          end
+        end
         @cli_options ||= {}
       end
 
@@ -74,6 +79,7 @@ module Croupier
       # return [Array] current cli options
       def cli_option option, description, params
         cli_options[:options] ||= []
+        define_method_for_option option, params[:type]
         cli_options[:options] << [option, description, params]
       end
 
@@ -109,6 +115,14 @@ module Croupier
 
       def respond_to?(method, include_private = false) # :nodoc:
         ::Croupier::DistributionGenerators.list.include?(method.to_s) || super(method, include_private)
+      end
+
+      protected
+      def define_method_for_option name, type=:float
+        name = :"#{name}?" if type == :boolean
+        self.send :define_method, name do
+          self.params[name.to_sym]
+        end
       end
     end
 

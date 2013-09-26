@@ -8,6 +8,11 @@ class TestDegenerateDistribution < Minitest::Test
     assert_respond_to dist, 'description'
   end
 
+  def test_constant_returns_current_distribution_constant
+    dist = Croupier::Distributions::Degenerate.new constant: "Macarena"
+    assert_equal "Macarena", dist.constant
+  end
+
   def test_returns_only_one_value
     dist = Croupier::Distributions::Degenerate.new constant: 5.34
     5.times do

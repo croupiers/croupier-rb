@@ -124,6 +124,25 @@ class TestDistributionClassClassMethods < Minitest::Test
     assert_empty Croupier::Distribution.cli_options
   end
 
+  def test_cli_option_adds_instance_method
+    a = distribution_subclass_with_name "A"
+    a.cli_option :cowabunga, "TMNT", {type: :float}
+    assert_respond_to a.new, :cowabunga
+  end
+
+  def test_cli_options_adds_instance_method_with_modified_name
+    a = distribution_subclass_with_name "A"
+    a.cli_option :are_you_my_mummy, "Doctor Who", {type: :boolean}
+    assert_respond_to a.new, :are_you_my_mummy?
+  end
+
+  def test_cli_option_defines_an_accessor
+    a = distribution_subclass_with_name "A"
+    a.cli_option :cowabunga, "TMNT", {type: :float}
+    instance = a.new cowabunga: 1.3
+    assert_equal 1.3, instance.cowabunga
+  end
+
   def test_cli_options_setter_adds_the_options
     opts = Hash.new
     a = distribution_subclass_with_cli_options opts
