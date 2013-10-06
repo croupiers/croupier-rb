@@ -27,15 +27,18 @@ module Croupier
         ]
       end
 
-      def initialize(options={})
-        super(options)
+      # Adjust std
+      adjust do |n|
+        n * std
       end
 
-      # FIXME: Create some sort of adjustment for these kinds of things.
-      def to_enum
-        @generator.to_enum.
-          map {|x| x * std}.  # Adjust standard deviation
-          map {|x| x + mean}  # Adjust mean
+      # Adjust mean
+      adjust do |n|
+        n + mean
+      end
+
+      def initialize(options={})
+        super(options)
       end
     end
   end

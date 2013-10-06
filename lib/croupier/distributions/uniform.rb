@@ -19,10 +19,18 @@ module Croupier
 
       cli_banner "Uniform distribution. Generate numbers following a continuous distribution on [a,b] (given a=min(included, excluded) and b=max(included,excluded))  where all points in the interval are equally likely."
 
-      enumerator do |c|
-        base_enum.map(&exclude_value).map do |n|
-          min + range * n
+      enumerator_block do |y|
+        loop do
+          y << ::Croupier.rand
         end
+      end
+
+      adjust do |n|
+        exclude_value.(n)
+      end
+
+      adjust do |n|
+        min + range * n
       end
 
       def initialize(options={})
@@ -43,16 +51,7 @@ module Croupier
       attr_reader :exclude_value, :min, :max, :range
 
       def inverted?
-        params[:included] > params[:excluded]
-      end
-
-      protected
-      def base_enum
-        Enumerator.new do |y|
-          loop do
-            y << Croupier.rand
-          end
-        end.lazy
+        included > excluded
       end
     end
   end

@@ -3,6 +3,10 @@ require "croupier"
 
 class TestDistributionClassClassMethods < Minitest::Test
 
+  def distribution_subclass
+    Class.new ::Croupier::Distribution
+  end
+
   def distribution_subclass_with_name name
     Class.new Croupier::Distribution do
       distribution_name name
@@ -203,5 +207,50 @@ class TestDistributionClassClassMethods < Minitest::Test
     assert_equal pa, a.generator_block
     assert_equal pb, b.generator_block
     assert_nil Croupier::Distribution.generator_block
+  end
+
+  def test_adjustments_is_empty_at_first
+    a = distribution_subclass
+    assert_empty a.adjustments, "Adjustments are not empty"
+  end
+
+  def test_adjustment_add_proc_to_adjustments_in_order
+    a = distribution_subclass
+    proc1 = -> { 1 }
+    proc2 = -> { 2 }
+    a.adjust &proc1
+    a.adjust &proc2
+    assert_equal 2, a.adjustments.length
+    assert_equal proc1, a.adjustments.first
+    assert_equal proc2, a.adjustments.last
+  end
+
+  def test_adjustment_adds_separated_adjustment_for_different_subclasses
+    a = distribution_subclass
+    a.adjust do |x| 1 end
+    b = distribution_subclass
+    b.adjust do |x| 2 end
+
+    assert a.adjustments != b.adjustments
+    assert_empty distribution_subclass.adjustments
+  end
+
+  def test_adjustments_are_called_in_order
+    a = distribution_subclass
+    a.enumerator_block do |y|
+      num = 0
+      loop do
+        num += 1; y << num
+      end
+    end
+    a.adjust do |n|
+      n + 3
+    end
+
+    a.adjust do |n|
+      n * 2
+    end
+
+    assert_equal [8, 10, 12], a.new.take(3)
   end
 end

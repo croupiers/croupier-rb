@@ -24,19 +24,23 @@ module Croupier
       # Returns a lambda that completes
       # the credit card number up to
       # 15 numbers.
-      def fill_number
+      def self.fill_number
         ->(n) { "#{n}#{generate_random_string(15-n.size)}"[0..14] }
       end
 
       # Returns a lambda that adds
       # the checksum number
-      def add_checksum
+      def self.add_checksum
         ->(n) { "#{n}#{check_digit_for(n)}" }
       end
 
       enumerator do |c|
-        c.degenerate(constant: init).map(&fill_number).map(&add_checksum)
+        c.degenerate(constant: init)
       end
+
+      adjust &fill_number
+
+      adjust &add_checksum
 
       def initialize(options={})
         super(options)

@@ -100,6 +100,23 @@ module Croupier
         @cli_name
       end
 
+      # Adds an adjustment. And adjustment is the
+      # block that will go through a map after the
+      # enumerator is created.
+      #
+      # @param [Proc] block for the map.
+      # @returns [Array] procs
+      def adjust &block
+        adjustments << block
+      end
+
+      # Returns current adjustments.
+      #
+      # @returns [Array] array of procs.
+      def adjustments
+        @adjustment ||= []
+      end
+
       def default_parameters
         Hash[(cli_options[:options]||{}).map do |name, desc, hash|
           [name,hash[:default]]
@@ -189,10 +206,19 @@ module Croupier
     end
 
     def to_enum
-      @enum ||= @generator.to_enum.lazy
+      @enum ||= apply_adjustments(@generator.to_enum.lazy)
     end
 
     protected
+
+    def apply_adjustments enum
+      self.class.adjustments.inject(enum) do |enum, adj|
+        enum.map do |n|
+          self.instance_exec(n, &adj)
+        end
+      end
+    end
+
     def create_generator
       if self.class.generator_class && self.class.generator_block
         @generator = self.class.generator_class.new self, &self.class.generator_block
