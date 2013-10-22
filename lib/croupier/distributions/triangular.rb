@@ -30,11 +30,11 @@ module Croupier
       def initialize(options={})
         super(options)
         if params[:lower] >= params[:upper]
-          warn("Lower limit is greater than upper limit. Changing their values.")
+          ::Croupier.warn("Lower limit is greater than upper limit. Changing their values.")
           params[:lower], params[:upper] = params[:upper], params[:lower]
         end
         if params[:mode] < params[:lower] || params[:upper] <  params[:mode]
-          warn("Mode is not in the support. Mode value will be change to median.")
+          ::Croupier.warn("Mode is not in the support. Mode value will be change to median.")
           params[:mode] = (params[:lower]+params[:upper])/2.0;
         end
         @F_c = (params[:mode]-params[:lower]).to_f/(params[:upper]-params[:lower])

@@ -12,5 +12,4 @@ class TestCroupierModule < Minitest::Test
     Croupier.application = app
     assert Croupier.application == app
   end
-
 end

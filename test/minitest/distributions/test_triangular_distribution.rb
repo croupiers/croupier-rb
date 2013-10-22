@@ -6,6 +6,14 @@ class TestTriangularDistribution < Minitest::Test
     ::Croupier::Distributions.triangular(opts)
   end
 
+  def setup
+    ::Croupier.deactivate_warnings
+  end
+
+  def teardown
+    ::Croupier.activate_warnings
+  end
+
   def test_change_lower_and_upper_values_if_they_are_not_in_the_right_order
     t = triangular lower: 8, upper: 3, mode: 4
     assert_equal 3, t.lower, "lower is not 3"

@@ -99,5 +99,30 @@ module Croupier
     def seed
       random.seed
     end
+
+    # Croupier Warn
+    #
+    # @param *args [String[,String...]] messages
+    # @return NilClass
+    def warn *args
+      if @warn
+        args.each {|m| message m }
+      end
+    end
+
+    # Activates warning messages (activated by default)
+    def activate_warnings
+      @warn = true
+    end
+
+    # Deactivates warning messages
+    def deactivate_warnings
+      @warn = false
+    end
+
+    def warn?
+      @warn = true if @warn.nil?
+      @warn
+    end
   end
 end
