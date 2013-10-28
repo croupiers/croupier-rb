@@ -8,31 +8,23 @@ module Croupier
     #
     class Exponential < ::Croupier::Distribution
 
+      distribution_name "Exponential distribution"
+
+      distribution_description "Continuous probability distribution with a lambda param rate describing the time between events in a Poisson process"
+
+      cli_name "exponential"
+
+      cli_option :lambda, 'rate param', {type: :float, default: 1.0}
+
+      cli_banner "Exponential distribution. Generate numbers following a exponential distribution for a given lambda rate"
+
+      inv_cdf do |n|
+        (-1 / lambda) * Math.log(1 - n)
+      end
+
       def initialize(options={})
-        @name = "Exponential distribution"
-        @description = "Continuous probability distribution with a lambda param rate describing the time between events in a Poisson process"
-        configure(options)
-        raise Croupier::InputParamsError, "Invalid interval values" if params[:lambda] <= 0
-      end
-
-      def inv_cdf n
-        (-1/params[:lambda]) * Math.log(n)
-      end
-
-      def default_parameters
-        {:lambda => 1.0}
-      end
-
-      def self.cli_name
-        "exponential"
-      end
-
-      def self.cli_options
-        {:options => [
-           [:lambda, 'rate param', {:type=>:float, :default => 1.0}]
-         ],
-         :banner => "Exponential distribution. Generate numbers following a exponential distribution for a given lambda rate"
-        }
+        super(options)
+        raise Croupier::InputParamsError, "lambda cannot be negative" if params[:lambda] <= 0
       end
     end
   end

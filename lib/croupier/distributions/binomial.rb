@@ -8,46 +8,36 @@ module Croupier
     # probability p
     class Binomial < ::Croupier::Distribution
 
+      distribution_name "Binomial distribution"
+
+      distribution_description "Discrete probability distribution of the number of successes in a sequence of Bernoulli trials."
+
+      cli_name "binomial"
+
+      cli_option :size, 'number of trials', {type: :integer, default: 1}
+      cli_option :success, 'success probability of each trial', {type: :float, short: "-p", default: 0.5}
+
+      cli_banner "Binomial distribution. Discrete probability distribution of the number of successes in a sequence of Bernoulli trials."
+
+
+      enumerator_block do |y|
+        g = ::Croupier::Distributions.geometric(success: success).to_enum.lazy
+        loop do
+          x = -1; s = 0
+
+          begin
+            s += g.next
+            x += 1
+          end while s <= size
+
+          y << x
+        end
+      end
+
       def initialize(options={})
-        @name = "Binomial distribution"
-        @description = "Discrete probability distribution of the number of successes in a sequence of Bernoulli trials."
-        configure(options)
+        super(options)
         raise Croupier::InputParamsError, "Probability of success must be in the interval [0,1]" if params[:success] > 1 || params[:success] < 0
       end
-
-      def generate_number
-        x = -1
-        s = 0
-        loop do
-          s += base_geometric.generate_number
-          x += 1
-          break if s > params[:size]
-        end
-        x
-      end
-
-      def default_parameters
-        {:success => 0.5, :size => 1}
-      end
-
-      def self.cli_name
-        "binomial"
-      end
-
-      def self.cli_options
-        {:options => [
-           [:size, 'number of trials', {:type => :integer, :default => 1}],
-           [:success, 'success probability of each trial', {:type=>:float, :short => "-p", :default => 0.5}]
-         ],
-         :banner => "Binomial distribution. Discrete probability distribution of the number of successes in a sequence of Bernoulli trials."
-        }
-      end
-
-      private
-      def base_geometric
-        @base_geometric ||= ::Croupier::Distributions::Geometric.new(success: params[:success])
-      end
-
     end
   end
 end

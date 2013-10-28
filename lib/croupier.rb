@@ -1,10 +1,13 @@
-require 'croupier/version'
-require 'croupier/cli/trollop'
-require 'croupier/exceptions'
-require 'croupier/distribution'
-require 'croupier/distributions'
+require_relative 'croupier/version'
+require_relative 'croupier/cli/trollop'
+require_relative 'croupier/exceptions'
+require_relative 'croupier/distribution_generator'
+require_relative 'croupier/distribution_generators'
+Dir[File.join(File.dirname(__FILE__), "./croupier/distribution_generators/*.rb")].each {|f| require f}
+require_relative 'croupier/distribution'
+require_relative 'croupier/distributions'
 Dir[File.join(File.dirname(__FILE__), "./croupier/distributions/*.rb")].each {|f| require f}
-require 'croupier/cli/application'
+require_relative 'croupier/cli/application'
 #####################################################################
 # Croupier module.
 # Used as a namespace containing all the Croupier code.
@@ -61,6 +64,65 @@ module Croupier
       trap('INT') do
         Croupier.stop("\nCroupier Exiting... Interrupt signal received.")
       end
+    end
+
+    ## Random generator related stuff.
+
+    # Same as Random#rand applied to Croupier random object.
+    #
+    # @return random number x, 0 <= x < 1
+    def rand *args
+      random.rand *args
+    end
+
+    # Sets Croupier random generator to a new object
+    # with provided seed.
+    # If seed is omitted, a new Random object is created
+    # without explicit seed.
+    # @param seed [Numeric] optional seed
+    # @return [NilClass] nil
+    def srand(seed=nil)
+      @random_generator = seed ? Random.new(seed) : Random.new
+      nil
+    end
+
+    # Croupier Random object
+    #
+    # @return [Random] croupier random object
+    def random
+      @random_generator ||= Random.new
+    end
+
+    # Croupier Random object seed.
+    #
+    # @return [Numeric] croupier random object seed
+    def seed
+      random.seed
+    end
+
+    # Croupier Warn
+    #
+    # @param *args [String[,String...]] messages
+    # @return NilClass
+    def warn *args
+      if @warn
+        args.each {|m| message m }
+      end
+    end
+
+    # Activates warning messages (activated by default)
+    def activate_warnings
+      @warn = true
+    end
+
+    # Deactivates warning messages
+    def deactivate_warnings
+      @warn = false
+    end
+
+    def warn?
+      @warn = true if @warn.nil?
+      @warn
     end
   end
 end

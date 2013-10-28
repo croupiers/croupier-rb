@@ -7,42 +7,41 @@ module Croupier
     # is a, upper limit b and mode c (a <= c <= b).
     class Triangular < ::Croupier::Distribution
 
-      def initialize(options={})
-        @name = "Triangular distribution"
-        @description = "Continuous probability distribution whose lower limit is a, upper limit b and mode c (a <= c <= b)"
-        configure(options)
-        raise Croupier::InputParamsError, "Invalid interval values" if params[:a] >= params[:b]
-        if params[:c] < params[:a] || params[:b] <  params[:c]
-          warn("Mode is not in the support. Mode value will be change to median.")
-          params[:c] = (params[:a]+params[:b])/2;
-        end
-        @F_c = (params[:c]-params[:a])/(params[:b]-params[:a])
-      end
+      distribution_name "Triangular distribution"
 
-      def inv_cdf n
+      distribution_description "Continuous probability distribution whose lower limit is a, upper limit b and mode c (a <= c <= b)"
+
+      cli_name "triangular"
+
+      cli_option :lower, 'lower limit', {type: :float, short: '-a', default: 0.0}
+      cli_option :upper, 'upper limit', {type: :float, short: '-b', default: 1.0}
+      cli_option :mode, 'mode', {type: :float, short: '-c', default: 0.5}
+
+      cli_banner "Triangular distribution. Continuous distribution whose support is the interval (a,b), with mode c."
+
+      inv_cdf do |n|
         if n < @F_c
-          params[:a] + Math.sqrt(   n   * (params[:b] - params[:a]) * (params[:c] - params[:a]) )
+          lower + Math.sqrt(   n   * range * (mode - lower) )
         else
-          params[:b] - Math.sqrt( (1-n) * (params[:b] - params[:a]) * (params[:b] - params[:c]) )
+          upper - Math.sqrt( (1-n) * range * (upper - mode) )
         end
       end
 
-      def default_parameters
-        {:a => 0.0, :b => 1.0, :c => 0.5}
+      def initialize(options={})
+        super(options)
+        if params[:lower] >= params[:upper]
+          ::Croupier.warn("Lower limit is greater than upper limit. Changing their values.")
+          params[:lower], params[:upper] = params[:upper], params[:lower]
+        end
+        if params[:mode] < params[:lower] || params[:upper] <  params[:mode]
+          ::Croupier.warn("Mode is not in the support. Mode value will be change to median.")
+          params[:mode] = (params[:lower]+params[:upper])/2.0;
+        end
+        @F_c = (params[:mode]-params[:lower]).to_f/(params[:upper]-params[:lower])
       end
 
-      def self.cli_name
-        "triangular"
-      end
-
-      def self.cli_options
-        {:options => [
-           [:a, 'lower limit', {:type=>:float, :default => 0.0}],
-           [:b, 'upper limit', {:type=>:float, :default => 1.0}],
-           [:c, 'mode'       , {:type=>:float, :default => 0.5}]
-         ],
-         :banner => "Triangular distribution. Continuous distribution whose support is the interval (a,b), with mode c."
-        }
+      def range
+        @range ||= upper - lower
       end
     end
   end

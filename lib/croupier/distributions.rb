@@ -4,9 +4,9 @@ module Croupier
     class << self
       # An array containing all available Distribution classes
       def all
-        ::Croupier::Distributions.constants(false).inject([]){|list, distrib|
+        ::Croupier::Distributions.constants(false).each_with_object([]){|distrib, list|
           d = ::Croupier::Distributions.const_get(distrib)
-          (d.is_a?(Class) && d.superclass == Croupier::Distribution) ? list << d : list
+          list << d if (d.is_a?(Class) && d.superclass == Croupier::Distribution)
         }.uniq.compact
       end
 
@@ -17,7 +17,7 @@ module Croupier
 
       def method_missing(method, *args, &block) # :nodoc:
         return super unless self.respond_to?(method)
-        self.all.select{|d| d.cli_name == method.to_s}.first.new *args
+        self.all.find{|d| d.cli_name == method.to_s}.new(*args)
       end
 
       def respond_to?(method, include_private = false) # :nodoc:
@@ -25,5 +25,4 @@ module Croupier
       end
     end
   end
-
 end

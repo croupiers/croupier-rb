@@ -7,10 +7,47 @@ module Croupier
     #
     class CreditCard < ::Croupier::Distribution
 
+      distribution_name "CreditCard distribution"
+
+      distribution_description "Generates random credit card numbers."
+
+      cli_name "credit_card"
+
+      cli_option :master_card, 'master card type', {type: :boolean, default: false}
+      cli_option :american_express, 'american express card type', {type: :boolean, default: false}
+      cli_option :visa, 'visa card type', {type: :boolean, default: false}
+      cli_option :discover, 'discover card type', {type: :boolean, default: false}
+      cli_option :initial_values, 'initial values for the credit card. They will be placed after card type if one is given.', {type: :string, default: ""}
+
+      cli_banner "Credit Card distribution. Generate random card numbers"
+
+      # Returns a lambda that completes
+      # the credit card number up to
+      # 15 numbers.
+      def self.fill_number
+        ->(n) { "#{n}#{generate_random_string(15-n.size)}"[0..14] }
+      end
+
+      # Returns a lambda that adds
+      # the checksum number
+      def self.add_checksum
+        ->(n) { "#{n}#{check_digit_for(n)}" }
+      end
+
+      enumerator do |c|
+        c.degenerate(constant: init)
+      end
+
+      adjust &fill_number
+
+      adjust &add_checksum
+
       def initialize(options={})
-        @name = "CreditCard distribution"
-        @description = "Generates random credit card numbers."
-        configure(options)
+        super(options)
+      end
+
+      def init
+        "#{initial_value_by_card_type}#{initial_values}"
       end
 
       def generate_number
@@ -18,20 +55,6 @@ module Croupier
         n += generate_random_string(15 - n.size)
         n = n[0..14]
         n + check_digit_for(n).to_s
-      end
-
-      def default_parameters
-        {
-          :master_card => false,
-          :american_express => false,
-          :discover => false,
-          :visa => false,
-          :initial_values => ""
-        }
-      end
-
-      def self.cli_name
-        "credit_card"
       end
 
       def check_digit_for(n)
@@ -67,18 +90,6 @@ module Croupier
         return 5 if params[:master_card]
         return 6 if params[:discover]
         ""
-      end
-
-      def self.cli_options
-        {:options => [
-           [:master_card, 'master card type', {:type=>:boolean, :default => false}],
-           [:american_express, 'american express card type', {:type=>:boolean, :default => false}],
-           [:visa, 'visa card type', {:type=>:boolean, :default => false}],
-           [:discover, 'discover card type', {:type=>:boolean, :default => false}],
-           [:initial_values, 'initial values for the credit card. They will be place after card type if one is given.', {:type=>:string, :default => ""}]
-         ],
-         :banner => "Credit Card distribution. Generate random card numbers"
-        }
       end
     end
   end

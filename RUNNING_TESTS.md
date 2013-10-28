@@ -12,7 +12,14 @@ You can run these tests using the default Rake task:
 
     $ rake
 
-### R tests
+### R tests (automagic)
+
+Make sure you have downloaded all git submodules first since R tests are now a
+dependency. From the 2.0 release, validating the distributions is as simple as running:
+
+    > rake test:distributions
+
+### R tests (manual steps)
 
 There's a group of tests validating the probability distribution of several samples of numbers generated with Croupier.
 To generate samples to be tested, run the script ```generate_test_data.sh```:
@@ -35,13 +42,13 @@ Other R packages needed:
     * vcd
 
 The test script will try to install all dependencies if they are not found in your R installation.
-You can run the test/testsuite.R file:
+You can run the test/rtests.R file:
 
 Using Rscript:
 
-    $ Rscript testsuite.R
+    $ Rscript rtests.R
 
 or from the R console:
 
-    source('testsuite.R')
+    source('rtests.R')
 

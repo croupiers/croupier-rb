@@ -3,13 +3,13 @@
 Croupier generates random samples of numbers with specific probability distributions.
 
 [![Gem Version](https://badge.fury.io/rb/croupier.png)](http://badge.fury.io/rb/croupier)
-[![Build Status](https://secure.travis-ci.org/croupiers/croupier-rb.png?branch=master)](http://travis-ci.org/croupiers/croupier-rb)
+[![Build Status](https://secure.travis-ci.org/croupiers/croupier-rb.png?branch=2.0)](http://travis-ci.org/croupiers/croupier-rb)
 
 ## Install
 
 You need to have Ruby and Rubygems installed in your system. Then install croupier with:
 
-    $ gem install croupier
+    $ gem install croupier --pre
 
 ## Getting Started
 
@@ -29,8 +29,8 @@ where:
 
 ### Examples
 
-    $ croupier uniform 500                  # => 500 numbers with uniform distribution in [0,1] (default interval)
-    $ croupier uniform 125 -min 7 -max 15   # => 125 numbers with uniform distribution in [7,15]
+    $ croupier uniform 500                  # => 500 numbers with uniform distribution in [0,1) (default interval)
+    $ croupier uniform 125 --included 15 --excluded 7   # => 125 numbers with uniform distribution in (7,15]
     $ croupier exponential 1000 -lambda 1.3 # => 1000 numbers following an exponential distribution with rate 1.3
 
 ### Available distributions and options
@@ -40,6 +40,7 @@ Current version implements the following distributions:
 * Bernoulli
 * Binomial
 * Cauchy
+* Credit Card
 * Degenerate
 * Exponential
 * Gamma
@@ -66,38 +67,36 @@ First of all require the croupier library:
 
     require 'croupier'
 
-And then use the the distribution you want to generate the sample. You can get just one number (using ```.generate_number```) or an array of any given size (using ```.generate_sample(N)```)
+And then use the the distribution you want to generate the sample. Since version 2.0, all ```Croupier::Distribution```s
+are ```Enumerable```s, and the ```.generate_number``` and ```.generate_sample(n)``` methods are now deprecated.
+ ```first``` and ```take(n)``` can be used instead.
 
-    dist = Croupier::Distributions::Exponential.new(:lambda => 1.7)
-    dist.generate_sample(100) #=> returns an array of 100 random numbers following an exponential with rate 1.7
-    dist.generate_number #=> returns one random number following an exponential with rate 1.7
+    dist = Croupier::Distributions.exponential(lambda: 1.7)
+    dist.take(100) #=> returns an array of 100 random numbers following an exponential with rate 1.7
+    dist.first #=> returns one random number following an exponential with rate 1.7
 
-It's posible to instantiate each Distribution class directly:
+Though it's posible to instantiate each Distribution class directly:
 
-    dist = Croupier::Distributions::Exponential.new(:lambda => 1.7)
+    dist = Croupier::Distributions::Exponential.new(lambda: 1.7)
 
-or calling Distributions methods:
+calling methods on ```Croupier::Distributions``` (note the final s) module is recommended:
 
-    dist = Croupier::Distributions.exponential :lambda => 1.7
+    dist = Croupier::Distributions.exponential lambda: 1.7
 
-To get a list of all available distributions/methods in Distributions module call ```list```
+To get a list of all available distributions/methods in ```Distributions``` module call ```list```
 
     Croupier::Distributions.list
 
-Distributions have a ```to_enum``` method that return an (infinity) enumerator, so you
-can use any Enumerable method on it:
+Distributions' Enumerable behaviour comes from an infinite ```Enumerator::Lazy```. Take this into account
+when calling ```Enumerable``` methods.
 
-    dist = Croupier::Distributions.exponential(:lambda => 17).to_enum
+    dist = Croupier::Distributions.exponential(lambda: 17)
     dist.each_slice(2).take(3)
     => [[0.7455570432863594, 1.6543154039789472], [4.261950709816685, 0.2860058032480469], [1.4761279576207826, 0.6433699882662834]]
 
 ## How to generate a new distribution.
 
-There are several ways. The easiest one is to override ```generate_number``` or ```generate_sample``` (one is enough).
-
-Nonetheless there is another cool way to implement a distribution: implementing ```inv_cdf```:
-
-```ìnv_cdf``` receives a parameter ```n``` that is a sample of a uniform distribution. It should return the inverse of the cdf applied to ```n```.
+ TO BE COMPLETED WHEN API IS FINISHED.
 
 ## License
 

@@ -1,11 +1,16 @@
 require "minitest/autorun"
 require "croupier"
-class TestDistributionClass < MiniTest::Unit::TestCase
+class TestDegenerateDistribution < Minitest::Test
 
   def test_distribution_has_name_and_description
     dist = Croupier::Distributions::Degenerate.new
     assert_respond_to dist, 'name'
     assert_respond_to dist, 'description'
+  end
+
+  def test_constant_returns_current_distribution_constant
+    dist = Croupier::Distributions::Degenerate.new constant: "Macarena"
+    assert_equal "Macarena", dist.constant
   end
 
   def test_returns_only_one_value
@@ -18,6 +23,6 @@ class TestDistributionClass < MiniTest::Unit::TestCase
   def test_to_enum
     enum = Croupier::Distributions::Degenerate.new(constant: 5).to_enum
     assert_kind_of Enumerator, enum
-    assert_equal [5,5,5], enum.take(3)
+    assert_equal [5,5,5], enum.take(3).to_a
   end
 end

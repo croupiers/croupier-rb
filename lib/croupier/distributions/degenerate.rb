@@ -6,30 +6,24 @@ module Croupier
     # Discrete probability distribution that returns the same value.
     class Degenerate < ::Croupier::Distribution
 
+      distribution_name "Degenerate distribution"
+
+      distribution_description "Discrete probability distribution that returns the same value each time."
+
+      cli_name "degenerate"
+
+      cli_option :constant, 'value to be returned', {type: :float, default: 42.0}
+
+      cli_banner "Degenerate distribution. Discrete probability distribution that returns the same value each time."
+
+      enumerator_block do |y|
+        loop do
+          y << constant
+        end
+      end
+
       def initialize(options={})
-        @name = "Degenerate distribution"
-        @description = "Discrete probability distribution that returns the same value each time."
-        configure(options)
-      end
-
-      def generate_number
-        params[:constant]
-      end
-
-      def default_parameters
-        {:constant => 42.0}
-      end
-
-      def self.cli_name
-        "degenerate"
-      end
-
-      def self.cli_options
-        {:options => [
-           [:constant, 'value to be returned', {:type=>:float, :default => 42.0}]
-         ],
-         :banner => "Degenerate distribution. Discrete probability distribution that returns the same value each time."
-        }
+        super(options)
       end
     end
   end

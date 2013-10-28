@@ -1,6 +1,6 @@
 require "minitest/autorun"
 require "croupier"
-class TestDistributionsModule < MiniTest::Unit::TestCase
+class TestDistributionsModule < Minitest::Test
 
   def test_list_of_all_distributions
     all = Croupier::Distributions.all
@@ -25,13 +25,13 @@ class TestDistributionsModule < MiniTest::Unit::TestCase
       assert list.include?(d.cli_name), "#{d.cli_name} not included in list"
     }
   end
-  
+
   def test_all_and_list_have_same_size
     all = Croupier::Distributions.all
     list = Croupier::Distributions.list
     assert list.size == all.size
   end
-  
+
   def test_dynamic_distribution_methods
     Croupier::Distributions.list.each{|method|
       assert Croupier::Distributions.respond_to?(method), "No response for #{method} method"

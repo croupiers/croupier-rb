@@ -1,6 +1,6 @@
 require "minitest/autorun"
 require "croupier"
-class TestDistributionClass < MiniTest::Unit::TestCase
+class TestDistributionClass < Minitest::Test
 
   def valid_options(optional={})
     {}.merge(optional)
@@ -14,6 +14,11 @@ class TestDistributionClass < MiniTest::Unit::TestCase
     dist = Croupier::Distributions::CreditCard.new
     assert_respond_to dist, 'name'
     assert_respond_to dist, 'description'
+  end
+
+  def test_init_method
+    c = Croupier::Distributions::CreditCard.new visa: true, initial_values: "5678"
+    assert_equal "45678", c.init
   end
 
   def test_visa_starts_with_4
