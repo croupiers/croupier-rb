@@ -42,7 +42,7 @@ module Croupier
           banner <<-EOS
 Croupier will generate random numbers with the specified distribution.
 
-Currently you can use this distributions:
+Currently you can use these distributions:
 [#{available_distribution_list.join(', ')}]
 
 Usage:
